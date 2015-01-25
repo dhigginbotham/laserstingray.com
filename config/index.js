@@ -16,6 +16,15 @@ var config = {
   env: process.env.NODE_ENV || 'development'
 };
 
+config.applicationRoles = {
+  optin: 1,
+  user: 3,
+  verified: 4,
+  apiUser: 7,
+  contributor: 8,
+  admin: 10
+};
+
 //
 // Global variables for templates
 //

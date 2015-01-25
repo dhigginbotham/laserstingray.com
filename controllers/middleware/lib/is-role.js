@@ -1,8 +1,4 @@
-var roles = {
-  optin: 1,
-  user: 3,
-  admin: 10
-};
+var roles = require('../../../config').applicationRoles;
 
 function canPlayRoleOf(user) {
   return function(role) {
@@ -15,7 +11,7 @@ function canPlayRoleOf(user) {
     } else {
       return null;
     }
-  }
+  };
 }
 
 function roleMiddleware(req, res, next) {

@@ -71,6 +71,7 @@ app.use(require('./controllers/auth'));
 app.use(require('./controllers/admin'));
 app.use(require('./controllers/blog'));
 app.use(require('./controllers/rest'));
+app.use(require('./controllers/errors'));
 
 app.listen(app.get('port'), function () {
   console.log('%s is listening on port %d in %s mode', 
