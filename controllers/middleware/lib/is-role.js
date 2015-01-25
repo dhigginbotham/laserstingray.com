@@ -4,19 +4,23 @@ var roles = {
   admin: 10
 };
 
-function canPlayRoleOf(user, role) {
-  if (roles.hasOwnProperty(role)) {
-    return (user.role >= roles[role] ? true : false);
-  } else {
-    return null;
+function canPlayRoleOf(user) {
+  return function(role) {
+    if (user) {
+      if (roles.hasOwnProperty(role)) {
+        return (user.role >= roles[role] ? true : false);
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
   }
 }
 
 function roleMiddleware(req, res, next) {
-  if (req.user) {
-    req.canPlayRoleOf = canPlayRoleOf;
-  }
-  next();
+  req.canPlayRoleOf = res.locals.canPlayRoleOf = canPlayRoleOf(req.user);
+  return next();
 }
 
 module.exports = roleMiddleware;

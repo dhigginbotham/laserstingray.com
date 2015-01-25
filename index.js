@@ -68,6 +68,7 @@ app.use(canPlayRoleOf);
 
 app.use(require('./controllers/home'));
 app.use(require('./controllers/auth'));
+app.use(require('./controllers/admin'));
 app.use(require('./controllers/blog'));
 app.use(require('./controllers/rest'));
 
