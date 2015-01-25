@@ -4,7 +4,7 @@ nav(role="navigation").navbar.navbar-inverse.navbar-static-top
     ul.nav.navbar-nav.pull-right
       li: a(href="/") Home
       li: a(href="/blog") Blog
-      if (canPlayRoleOf('admin'))
+      if (hasRoleOf('admin'))
         li: a(href="/admin") Dashboard
       if (!user)
         li: a(href="/auth") Login

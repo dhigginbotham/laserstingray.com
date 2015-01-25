@@ -20,6 +20,7 @@ var middleware = require('./controllers/middleware');
 var templateVariables = middleware.templateVariables;
 var userVariables = middleware.userVariables;
 var canPlayRoleOf = middleware.canPlayRoleOf;
+var hasRoleOf = middleware.hasRoleOf;
 var expressFlash = middleware.expressFlash;
 
 //
@@ -63,6 +64,7 @@ app.use(expressFlash);
 app.use(templateVariables);
 app.use(userVariables);
 app.use(canPlayRoleOf);
+app.use(hasRoleOf);
 
 //
 //sub applications
