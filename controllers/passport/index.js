@@ -25,7 +25,7 @@ passport.use(new LocalStrategy(
           user.last_login.push(Date.now());
           user.save(function(err) {
             if (err) return done(new Error(err));
-            return done(null, user, {message: 'welcome back' + user.username});
+            return done(null, user, {message: 'welcome back ' + user.username});
           });
         } else {
           return done(null, false, {message: 'bad username/password combo'});
