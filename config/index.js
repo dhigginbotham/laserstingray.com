@@ -16,6 +16,13 @@ var config = {
   env: process.env.NODE_ENV || 'development'
 };
 
+//
+// Application role levels, the way these
+// work is if your role is a greater number
+// than whatever role is specified for you
+// can play that role
+//
+
 config.applicationRoles = {
   optin: 1,
   user: 3,
