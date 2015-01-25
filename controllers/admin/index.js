@@ -16,7 +16,7 @@ app.use(prefix, function(req, res, next) {
   if (req.canPlayRoleOf('admin')) {
     res.locals.marked = marked;
     res.locals.moment = moment;
-    return next(); 
+    return next();
   } else {
     res.redirect('back');
   }

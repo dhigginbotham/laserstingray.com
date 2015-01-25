@@ -16,7 +16,7 @@ function hasRoleOf(user) {
       var roleSum = role.reduce(function(last, curr, indx, list) {
         return last + (roles[list[indx]] || 0);
       }, 0);
-      return hasAllRoles(roleSum);
+      return hasAnyRoles(roleSum);
     } else {
       return null;
     }
