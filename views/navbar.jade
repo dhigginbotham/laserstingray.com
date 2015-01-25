@@ -1,0 +1,10 @@
+nav(role="navigation").navbar.navbar-inverse.navbar-static-top
+  .container
+    a(href="/").navbar-brand #{globalVars.appName}
+    ul.nav.navbar-nav.pull-right
+      li: a(href="/") Home
+      li: a(href="/dashboard") Dashboard
+      if (!user)
+        li: a(href="/auth") Login
+      else
+        li: a(href="/auth/logout") Logout

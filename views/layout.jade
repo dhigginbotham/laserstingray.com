@@ -1,0 +1,39 @@
+doctype html
+//if lt IE 7
+  <html class="no-js lt-ie9 lt-ie8 lt-ie7">
+//if IE 7
+  <html class="no-js lt-ie9 lt-ie8">
+//if IE 8
+  <html class="no-js lt-ie9">
+//[if gt IE 8]><!
+  html(class='no-js')
+//<![endif]
+html(lang="en")
+  head
+    //if lt IE 10
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js" />
+      <script src="//cdnjs.cloudflare.com/ajax/libs/json3/3.2.4/json3.min.js" />
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width")
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    meta(name='viewport', content='width=device-width,initial-scale=1')
+
+    block headerStyles
+      link(rel="stylesheet", type="text/css", href="/css/style.min.css")
+      if (adminSection)
+        link(rel="stylesheet", type="text/css", href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css")
+    
+    title #{globalVars.title}
+          
+  body(ng-app="socialShare")
+    include navbar
+    block content
+
+    block footer
+      footer.clearfix.container
+        p.pull-right.text-primary Copyright #{globalVars.copyrightDate} #{globalVars.appName}
+    
+    block footerScripts
+      script(type="text/javascript", src="/js/client.min.js")
+      if (adminSection)
+        script(type="text/javascript", src="/js/admin.min.js")

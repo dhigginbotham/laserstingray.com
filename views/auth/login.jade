@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+  .container
+    form(role="form", method="post", action="/auth")
+      .form-group
+        label(for="usernameField") Username
+        input.form-control(type="text", id="usernameField", name="username", placeholder="Username")
+      .form-group
+        label(for="passwordField") Password
+        input.form-control(type="password", id="passwordField", name="password", placeholder="Password")
+      button.btn.btn-default(type="submit") Login
