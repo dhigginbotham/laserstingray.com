@@ -1,0 +1,10 @@
+extends ../layout
+
+block content
+  .container
+    each b in blog
+      h1 
+        p.pull-right.small #{moment(b.created_date).format('MMMM Do YYYY, h:mm:ss a')}
+        a(href="/blog/#{b.id}") !{marked(b.title)}
+      hr
+      P !{marked(b.body)}

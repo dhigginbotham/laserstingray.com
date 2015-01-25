@@ -25,7 +25,8 @@ config.templateVariables = {
 };
 
 config.seed = {
-  admin: true
+  admin: true,
+  blog: true
 };
 
 module.exports = config;
