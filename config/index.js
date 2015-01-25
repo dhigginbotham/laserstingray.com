@@ -24,12 +24,11 @@ var config = {
 //
 
 config.applicationRoles = {
-  optin: 1,
-  user: 3,
-  verified: 4,
-  apiUser: 7,
-  contributor: 8,
-  admin: 10
+  optin: 2,
+  user: 4,
+  apiUser: 16,
+  contributor: 32,
+  admin: 64
 };
 
 //
