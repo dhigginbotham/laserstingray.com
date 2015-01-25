@@ -57,6 +57,10 @@ if (app.get('env') == 'development') {
   app.use(morgan('dev'));
 }
 
+//
+//passport wiring for authentication
+//
+
 app.use(passport.initialize());
 app.use(passport.session());
 
