@@ -4,3 +4,31 @@ block content
   .container
     h1 Welcome to the Admin Dashboard
     hr
+    .row
+      .col-md-3
+        .panel.panel-default(style="height:150px;")
+          .panel-heading 
+            a(href="/admin/blog"): strong Create Post
+          .panel-body
+            p Create a new blog post, this is what you're supposed to do on the daily, remember?
+      .col-md-3
+        .panel.panel-default(style="height:150px;")
+          .panel-heading 
+            a(href="/admin/blog"): strong Edit Post
+          .panel-body
+            p Remember that mistake you made, you should really fix it here.
+      .col-md-6
+        .panel.panel-primary(style="height:150px;")
+          .panel-heading
+            h3.panel-title #{globalVars.title} Stats
+          .panel-body
+            .row
+              .col-md-6
+                p.text-primary Total Posts `Coming soon`
+              .col-md-6
+                p.text-primary Total Users `Coming soon`
+            .row
+              .col-md-6
+                p.text-primary Total Comments `Coming soon`
+              .col-md-6
+                p.text-primary Total Views `Coming soon`

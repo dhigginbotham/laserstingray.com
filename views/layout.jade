@@ -6,7 +6,7 @@ doctype html
 //if IE 8
   <html class="no-js lt-ie9">
 //[if gt IE 8]><!
-  html(class='no-js')
+  <html class="no-js">
 //<![endif]
 html(lang="en")
   head
@@ -35,5 +35,6 @@ html(lang="en")
     
     block footerScripts
       script(type="text/javascript", src="/js/client.min.js")
+      script(type="text/javascript", src="/js/vendor.min.js")
       if (adminSection)
         script(type="text/javascript", src="/js/admin.min.js")

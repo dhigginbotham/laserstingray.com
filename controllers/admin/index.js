@@ -11,15 +11,19 @@ var prefix = '/admin';
 var id = '/:id?';
 
 app.use(prefix, function(req, res, next) {
-  res.locals.marked = marked;
-  res.locals.moment = moment;
-  return next();
+  if (req.canPlayRoleOf('admin')) {
+    res.locals.marked = marked;
+    res.locals.moment = moment;
+    return next(); 
+  } else {
+    res.redirect('back');
+  }
 });
 
 app.get(prefix, function(req, res, next) {
-  if (req.canPlayRoleOf('admin')) {
-    res.render('admin/dashboard');
-  } else {
-    res.redirect('/');    
-  }
+  res.render('admin/dashboard');
+});
+
+app.get(prefix + '/blog' + id, function(req, res, next) {
+  res.render('admin/save');
 });
