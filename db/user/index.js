@@ -45,24 +45,8 @@ UserSchema.methods.comparePassword = function(candidatePassword, cb) {
 
 var User = module.exports = db.model('User', UserSchema);
 
-if (config.seed.admin) {
-  db.once('open', function() {
-    User.findOne({username: 'admin'}, function(err, seed) {
-      if (err) throw new Error(err);
-      if (!seed) {
-        var admin = new User({
-          username: 'admin',
-          password: process.env.NODE_PASS,
-          email: 'admin@localhost.it',
-          role: 10
-        });
+//
+//db seed for user
+//
 
-        admin.save(function(err) {
-          if (err) throw new Error(err);
-        });
-      } else {
-        console.log('seed user already exists, you can turn this off in the config settings');
-      }
-    });
-  });
-}
+var user = require('../seed/user');
