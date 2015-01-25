@@ -20,6 +20,7 @@ var middleware = require('./controllers/middleware');
 var templateVariables = middleware.templateVariables;
 var userVariables = middleware.userVariables;
 var canPlayRoleOf = middleware.canPlayRoleOf;
+var expressFlash = middleware.expressFlash;
 
 //
 //app settings
@@ -58,6 +59,7 @@ if (app.get('env') == 'development') {
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(expressFlash);
 app.use(templateVariables);
 app.use(userVariables);
 app.use(canPlayRoleOf);

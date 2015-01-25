@@ -4,6 +4,8 @@ var config = require('../../config');
 var marked = require('marked');
 var moment = require('moment');
 
+var middle = require('./middle');
+
 app.set('views', config.views);
 app.set('view engine', 'jade');
 
@@ -20,7 +22,7 @@ app.use(prefix, function(req, res, next) {
   }
 });
 
-app.get(prefix, function(req, res, next) {
+app.get(prefix, middle.getBlogCount, middle.getUserCount, function(req, res, next) {
   res.render('admin/dashboard');
 });
 

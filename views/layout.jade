@@ -27,6 +27,12 @@ html(lang="en")
           
   body(ng-app="socialShare")
     include navbar
+
+    if (flash)
+      .container
+        .alert(class="alert-warning")
+          p #{flash}
+
     block content
 
     block footer

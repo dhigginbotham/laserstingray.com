@@ -1,5 +1,7 @@
 module.exports = {
   templateVariables: require('./lib/template-variables'),
   userVariables: require('./lib/user-variables'),
-  canPlayRoleOf: require('./lib/is-role'),
+  expressFlash: require('./lib/flash'),
+  serverSideTemplates: require('./lib/server-side-templates'),
+  canPlayRoleOf: require('./lib/is-role')
 };

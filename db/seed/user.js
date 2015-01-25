@@ -9,7 +9,7 @@ if (config.seed.admin) {
       if (!seed) {
         var admin = new User({
           username: 'admin',
-          password: process.env.NODE_PASS,
+          password: process.env.NODE_PASS || 'if_you_need_to_use_this_in_prod_set_env_var',
           email: 'admin@localhost.it',
           role: 10
         });

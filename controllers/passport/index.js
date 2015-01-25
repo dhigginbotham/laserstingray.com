@@ -25,7 +25,7 @@ passport.use(new LocalStrategy(
           user.last_login.push(Date.now());
           user.save(function(err) {
             if (err) return done(new Error(err));
-            return done(null, user);
+            return done(null, user, {message: 'welcome back' + user.username});
           });
         } else {
           return done(null, false, {message: 'bad username/password combo'});
@@ -44,7 +44,8 @@ exports.postLogin = function(req, res, next) {
     }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
-      return res.redirect('back');
+      req.session.messages = [info.message];
+      return res.redirect('/');
     });
   })(req, res, next);
 };
