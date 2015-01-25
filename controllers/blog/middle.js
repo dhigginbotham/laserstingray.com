@@ -12,7 +12,6 @@ function find(req, res, next) {
   var query = (req.params.id ? {_id: req.params.id} : {});
   Blog.findOne(query, function(err, data) {
     if (err) return next(err);
-    console.log(data);
     res.locals.blog = data;
     return next();
   });

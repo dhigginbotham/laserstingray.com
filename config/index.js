@@ -1,5 +1,9 @@
 var path = require('path');
 
+//
+// App shared configs
+//
+
 var config = {
   title: 'LaserStingray',
   appName: 'LaserStingray',
@@ -23,6 +27,10 @@ config.templateVariables = {
   appName: config.appName,
   copyrightDate: date.getFullYear()
 };
+
+//
+// Data seeds for demoing, and easier initial wiring
+//
 
 config.seed = {
   admin: true,
