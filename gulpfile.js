@@ -1,10 +1,8 @@
 var gulp = require('gulp');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
-
 // path prefix
 var prefix = 'assets/';
-
 var paths = {
   vendor: [
     prefix + 'src/js/vendor/modernizr.2.7.1.min.js',
