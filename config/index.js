@@ -16,6 +16,11 @@ var config = {
   env: process.env.NODE_ENV || 'development'
 };
 
+//
+// User roles, bitwise so we can mash up roles
+// together and verify authority
+//
+
 config.applicationRoles = {
   optin: 2,
   user: 4,

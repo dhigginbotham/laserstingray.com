@@ -79,6 +79,12 @@ app.use(require('./controllers/auth'));
 app.use(require('./controllers/admin'));
 app.use(require('./controllers/blog'));
 app.use(require('./controllers/rest'));
+app.use(require('./controllers/users'));
+
+//
+//error pages, dont mount things after this
+//
+
 app.use(require('./controllers/errors'));
 
 app.listen(app.get('port'), function () {
