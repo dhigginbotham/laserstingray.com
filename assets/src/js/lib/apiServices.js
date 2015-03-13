@@ -20,7 +20,7 @@ var apiServices = (function(w, d, $, pub) {
       if (id) delete req.id;
       var request = {
         url: '/' + collection + (id ? '/' + id : ''),
-        method: 'post',
+        method: method,
         data: req
       };
       return xhr(request, fn);
@@ -31,7 +31,6 @@ var apiServices = (function(w, d, $, pub) {
     var processor, processing = false;
     processor = function(next) {
       pub[next] = crud('method');
-      processing = false;
       if (methods.length) {
         return init();
       }
