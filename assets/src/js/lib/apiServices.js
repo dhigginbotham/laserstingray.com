@@ -57,7 +57,7 @@ var apiServices = (function(w, d, $, pub) {
       if (status == 'success') {
         return fn(null, data);
       } else {
-        return fn({msg: data.responseText, status: data.status, text: data.statusText}, null);
+        return fn({msg: data.responseText, status: data.status}, null);
       }
     };
 
