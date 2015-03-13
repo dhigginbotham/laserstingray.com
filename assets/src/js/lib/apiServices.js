@@ -5,12 +5,17 @@ var apiServices = (function(w, d, $, pub) {
   methods = ['get', 'post', 'put', 'delete'];
 
   conf = {
+    auth: false, // should be an object if used
     baseUrl: '/api',
-    auth: false // should be an object if used
+    exposeXhr: true
   };
 
   crud = function(method) {
-    return function(collection, req, fn) {
+    return function(collection, req, opts, fn) {
+      if (typeof opts === 'function' && typeof fn === 'undefined') {
+        fn = opts;
+        opts = null;
+      }
       var id = (req.id ? req.id : null);
       if (id) delete req.id;
       var request = {
@@ -18,13 +23,14 @@ var apiServices = (function(w, d, $, pub) {
         method: method,
         data: req
       };
-      return (typeof fn != 'undefined' ? xhr(request, fn) : xhr(request));
+      return (typeof fn !== 'undefined' ? xhr(request, fn) : xhr(request));
     };
   };
 
   init = function(fn) {
     var processor = function() {
-      pub[methods.shift()] = crud('method');
+      var cur = methods.shift();
+      pub[cur] = crud(cur);
       if (methods.length) return processor();
     };
     processor();
@@ -33,14 +39,14 @@ var apiServices = (function(w, d, $, pub) {
 
   // internal xhr wrapper for jq
   xhr = function(req, opts, fn) {
-    var callback, promise, options;
-    
+    var callback, promise, operator, options;
+    operator = (!!~req.url.indexOf('?') ? '&' : '?');
     options = {
-      cacheBusting: false,
+      cacheBusting: false, // if not boolean, expects string to append parameter
       localStorage: false
     };
 
-    if (typeof opts == 'function' && typeof fn == 'undefined') {
+    if (typeof opts === 'function' && typeof fn === 'undefined') {
       fn = opts;
       opts = null;
     }
@@ -51,24 +57,25 @@ var apiServices = (function(w, d, $, pub) {
       if (status == 'success') {
         return fn(null, data);
       } else {
-        return fn($.extend({}, data, {status: status}), null);
+        return fn({msg: data.responseText, status: data.status, text: data.statusText}, null);
       }
     };
 
     // add baseUrl to api request
-    req.url = conf.baseUrl + req.url;
+    req.url = conf.baseUrl + req.url + (options.cacheBusting ? operator + options.cacheBusting + '=' + new Date().getTime() : '');
 
     promise = $.ajax(req);
 
-    if (typeof fn == 'function') {
+    if (typeof fn === 'function') {
       return promise.done(callback).fail(callback);
     }
 
     return promise;
   };
 
-  return init(function(cfg) {
+  return init(function(cfg, mixins) {
     if (cfg) $.extend(conf, cfg);
+    if (conf.exposeXhr) pub.xhr = xhr;
     return pub;
   });
 

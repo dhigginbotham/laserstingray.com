@@ -9,5 +9,6 @@ var prefix = '/admin';
 var id = '/:id?';
 
 app.get('*', function(req, res) {
+  res.status(404);
   res.render('errors/404');
 });
