@@ -1,11 +1,6 @@
 var apiServices = (function(w, d, $, pub) {
 
-  var api, conf, crud, init, methods, xhr;
-
-  api = function(cfg) {
-    if (cfg) $.extend(conf, cfg);
-    return pub;
-  };
+  var conf, crud, init, methods, xhr;
 
   methods = ['get', 'post', 'put', 'delete'];
 
@@ -23,17 +18,17 @@ var apiServices = (function(w, d, $, pub) {
         method: method,
         data: req
       };
-      return xhr(request, fn);
+      return (typeof fn != 'undefined' ? xhr(request, fn) : xhr(request));
     };
   };
 
-  init = function() {
-    var processor = function(next) {
+  init = function(fn) {
+    var processor = function() {
       pub[methods.shift()] = crud('method');
       if (methods.length) return processor();
     };
     processor();
-    return api;
+    return fn;
   };
 
   // internal xhr wrapper for jq
@@ -72,6 +67,9 @@ var apiServices = (function(w, d, $, pub) {
     return promise;
   };
 
-  return init();
+  return init(function(cfg) {
+    if (cfg) $.extend(conf, cfg);
+    return pub;
+  });
 
 })(window,document,jQuery,{});
