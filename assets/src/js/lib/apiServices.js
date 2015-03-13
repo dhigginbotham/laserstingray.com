@@ -40,16 +40,17 @@ var apiServices = (function(w, d, $, pub) {
   // internal xhr wrapper for jq
   xhr = function(req, opts, fn) {
     var callback, promise, operator, options;
-    operator = (!!~req.url.indexOf('?') ? '&' : '?');
-    options = {
-      cacheBusting: false, // if not boolean, expects string to append parameter
-      localStorage: false
-    };
 
     if (typeof opts === 'function' && typeof fn === 'undefined') {
       fn = opts;
       opts = null;
     }
+
+    operator = (!!~req.url.indexOf('?') ? '&' : '?');
+    options = {
+      cacheBusting: false, // if not boolean, expects string to append parameter
+      localStorage: false
+    };
 
     if (opts) $.extend(options, opts);
 
