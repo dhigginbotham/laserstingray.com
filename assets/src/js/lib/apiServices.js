@@ -1,6 +1,6 @@
 var apiServices = (function(w, d, $, pub) {
 
-  var api, conf, defaults, init, xhr;
+  var api, conf, xhr;
 
   api = function(cfg) {
     if (cfg) $.extend(conf, cfg);
@@ -30,38 +30,40 @@ var apiServices = (function(w, d, $, pub) {
 
     callback = function(data, status) {
       if (status == 'success') {
-        return fn(null, data)
+        return fn(null, data);
       } else {
         return fn($.extend({}, data, {status: status}), null);
       }
     };
 
+    // add baseUrl to api request
+    req.url = conf.baseUrl + req.url;
+
     promise = $.ajax(req);
 
     if (typeof fn == 'function') {
-      promise.done(callback).fail(callback);
-    } else {
-      return promise;
+      return promise.done(callback).fail(callback);
     }
-    return false;
+
+    return promise;
   };
 
-  pub.getBlogs = function(req, fn) {
+  pub.get = function(collection, req, fn) {
     var id = (req.id ? req.id : null);
     var request = {
-      url: conf.baseUrl + '/blogs' + (id ? '/' + id : ''),
+      url: '/' + collection + (id ? '/' + id : ''),
       method: 'get'
     };
-    xhr(request, fn);
+    return xhr(request, fn);
   };
 
-  pub.postBlog = function(req, fn) {
+  pub.post = function(collection, req, fn) {
     var request = {
-      url: '/blogs',
+      url: '/' + collection,
       method: 'post',
       data: req
     };
-    xhr(request, fn);
+    return xhr(request, fn);
   };
 
   return api;
