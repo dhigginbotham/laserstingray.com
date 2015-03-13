@@ -6,10 +6,12 @@ var prefix = 'assets/';
 var paths = {
   vendor: [
     prefix + 'src/js/vendor/modernizr.2.7.1.min.js',
-    prefix + 'src/js/vendor/angular.1.3.0-rc.3.min.js'
+    prefix + 'src/js/vendor/jquery.1.11.1.min.js'
+  ],
+  library: [
+    prefix + 'src/js/lib/apiServices.js'
   ],
   vendorAdmin: [
-    prefix + 'src/js/vendor/jquery.1.11.1.min.js',
     prefix + 'src/js/vendor/bootstrap.3.0.3.min.js',
     prefix + 'src/js/vendor/summernote.0.5.9.min.js'
   ],
@@ -19,10 +21,17 @@ var paths = {
   ],
   productionClient: [
     prefix + 'build/js/vendor.min.js',
-    prefix + 'build/js/ng.client.min.js',
+    prefix + 'build/js/library.min.js'
   ],
   css: [prefix + 'src/css/**/*.css']
 };
+
+gulp.task('library', function() {
+  return gulp.src(paths.library)
+    .pipe(uglify())
+    .pipe(concat('library.min.js'))
+    .pipe(gulp.dest(prefix + 'build/js'));
+});
 
 gulp.task('vendor', function() {
   return gulp.src(paths.vendor)
@@ -57,11 +66,12 @@ gulp.task('productionAdmin', function() {
 });
 
 gulp.task('watch', function() {
+  gulp.watch(paths.library, ['library']);
+  gulp.watch(paths.css, ['css']);
   gulp.watch(paths.vendor, ['vendor']);
   gulp.watch(paths.vendorAdmin, ['vendorAdmin']);
   gulp.watch(paths.productionClient, ['productionClient']);
   gulp.watch(paths.productionAdmin, ['productionAdmin']);
-  gulp.watch(paths.css, ['css']);
 });
 
-gulp.task('uber', ['css', 'vendor', 'vendorAdmin', 'productionClient', 'productionAdmin', 'watch']);
+gulp.task('uber', ['library', 'css', 'vendor', 'vendorAdmin', 'productionClient', 'productionAdmin', 'watch']);
