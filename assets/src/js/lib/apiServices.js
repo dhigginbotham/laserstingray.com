@@ -17,7 +17,7 @@ var apiServices = (function(w, d, $, pub) {
       }
       var id = (req.id ? req.id : null);
       if ((method === 'put' || method === 'delete') && !id) {
-        return fn({fatal: 'Expected an id for method type: ' + method}, null);
+        return fn({error: 'Expected an id for method type: ' + method}, null);
       }
       if (id) delete req.id;
       var request = {
@@ -43,9 +43,7 @@ var apiServices = (function(w, d, $, pub) {
   // internal xhr wrapper for jq
   xhr = function(req, opts, fn) {
     var callback, promise, operator, options;
-
     if (typeof req === 'undefined') return false;
-
     if (typeof opts === 'function' && typeof fn === 'undefined') {
       fn = opts;
       opts = null;
@@ -62,7 +60,8 @@ var apiServices = (function(w, d, $, pub) {
     operator = (!!~req.url.indexOf('?') ? '&' : '?');
     options = {
       cacheBusting: false, // if not boolean, expects string to append parameter
-      localStorage: false
+      localStorage: false,
+      callback: callback
     };
 
     if (opts) $.extend(options, opts);
@@ -78,14 +77,10 @@ var apiServices = (function(w, d, $, pub) {
     promise = $.ajax(req);
 
     if (typeof fn === 'function') {
-      return promise.done(callback).fail(callback);
+      return promise.done(options.callback).fail(options.callback);
     }
 
     return promise;
-  };
-
-  pub.cfg = function() {
-    return conf;
   };
 
   return init(function(cfg) {
