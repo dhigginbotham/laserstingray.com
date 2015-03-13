@@ -28,18 +28,12 @@ var apiServices = (function(w, d, $, pub) {
   };
 
   init = function() {
-    var processor, processing = false;
-    processor = function(next) {
-      pub[next] = crud('method');
-      if (methods.length) {
-        return init();
-      }
+    var processor = function(next) {
+      pub[methods.shift()] = crud('method');
+      if (methods.length) return processor();
     };
-    if (!processing) {
-      processing = true;
-      var method = methods.shift();
-      processor(method);
-    }
+    processor();
+    return api;
   };
 
   // internal xhr wrapper for jq
@@ -78,8 +72,6 @@ var apiServices = (function(w, d, $, pub) {
     return promise;
   };
 
-  init();
-
-  return api;
+  return init();
 
 })(window,document,jQuery,{});
