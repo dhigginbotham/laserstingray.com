@@ -6,18 +6,17 @@ var prefix = 'assets/';
 var paths = {
   vendor: [
     prefix + 'src/js/vendor/modernizr.2.7.1.min.js',
-    prefix + 'src/js/vendor/jquery.1.11.1.min.js'
+    prefix + 'src/js/vendor/jquery.1.11.1.min.js',
+    prefix + 'src/js/vendor/bootstrap.3.0.3.min.js'
   ],
   library: [
     prefix + 'src/js/lib/apiServices.js'
   ],
   vendorAdmin: [
-    prefix + 'src/js/vendor/bootstrap.3.0.3.min.js',
     prefix + 'src/js/vendor/summernote.0.5.9.min.js'
   ],
   productionAdmin: [
-    prefix + 'build/js/vendor.admin.min.js',
-    prefix + 'build/js/ng.admin.min.js'
+    prefix + 'build/js/vendor.admin.min.js'
   ],
   productionClient: [
     prefix + 'build/js/vendor.min.js',

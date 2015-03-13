@@ -1,15 +1,46 @@
 var apiServices = (function(w, d, $, pub) {
 
-  var api, conf, xhr;
+  var api, conf, crud, init, methods, xhr;
 
   api = function(cfg) {
     if (cfg) $.extend(conf, cfg);
     return pub;
   };
 
+  methods = ['get', 'post', 'put', 'delete'];
+
   conf = {
     baseUrl: '/api',
     auth: false // should be an object if used
+  };
+
+  crud = function(method) {
+    return function(collection, req, fn) {
+      var id = (req.id ? req.id : null);
+      if (id) delete req.id;
+      var request = {
+        url: '/' + collection + (id ? '/' + id : ''),
+        method: 'post',
+        data: req
+      };
+      return xhr(request, fn);
+    };
+  };
+
+  init = function() {
+    var processor, processing = false;
+    processor = function(next) {
+      pub[next] = crud('method');
+      processing = false;
+      if (methods.length) {
+        return init();
+      }
+    };
+    if (!processing) {
+      processing = true;
+      var method = methods.shift();
+      processor(method);
+    }
   };
 
   // internal xhr wrapper for jq
@@ -48,23 +79,7 @@ var apiServices = (function(w, d, $, pub) {
     return promise;
   };
 
-  pub.get = function(collection, req, fn) {
-    var id = (req.id ? req.id : null);
-    var request = {
-      url: '/' + collection + (id ? '/' + id : ''),
-      method: 'get'
-    };
-    return xhr(request, fn);
-  };
-
-  pub.post = function(collection, req, fn) {
-    var request = {
-      url: '/' + collection,
-      method: 'post',
-      data: req
-    };
-    return xhr(request, fn);
-  };
+  init();
 
   return api;
 
