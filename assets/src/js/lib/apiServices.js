@@ -5,12 +5,13 @@ var apiServices = (function(w, d, $, pub) {
   conf = {
     auth: false, // should be an object if used
     baseUrl: '/api',
-    exposeXhr: true,
+    exposeXhr: false,
     methods: ['get', 'post', 'put', 'delete']
   };
 
   crud = function(method) {
     return function(collection, req, opts, fn) {
+      if (typeof collection !== 'string') return fn({error: 'Expected a collection keyname'}, null);
       if (typeof opts === 'function' && typeof fn === 'undefined') {
         fn = opts;
         opts = null;

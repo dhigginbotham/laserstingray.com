@@ -14,6 +14,7 @@ var id = '/:id?';
 
 app.use(prefix, function(req, res, next) {
   if (req.canPlayRoleOf('admin')) {
+    res.locals.adminSection = true;
     res.locals.marked = marked;
     res.locals.moment = moment;
     return next();

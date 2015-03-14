@@ -2,4 +2,23 @@ extends ../layout
 
 block content
   .container
-    h1 Blog admin
+    .row
+      h1 Blog Editor
+      hr
+      .alert.alert-warning.hidden(id="msgContainer"): p
+      form.form-horizontal(method="post", id="saveBlogForm")
+        .form-group
+          label.col-sm-2.control-label(for="title") Title
+          .col-sm-10
+            input.form-control(type="text", name="title", id="title", placeholder="Title")
+        .form-group
+          label.col-sm-2.control-label(for="slug") Slug
+          .col-sm-10
+            input.form-control(type="text", name="slug", id="slug", placeholder="Slug")
+        .form-group
+          label.col-sm-2.control-label(for="body") Content
+          .col-sm-10
+            textarea.form-control(type="text", name="body", id="body")
+        .form-group
+          .col-sm-12
+            button.pull-right.btn.btn-primary(type="submit", id="saveBlogBtn", data-form-selector="#saveBlogForm") Save

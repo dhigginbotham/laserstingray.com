@@ -10,13 +10,19 @@ var paths = {
     prefix + 'src/js/vendor/bootstrap.3.0.3.min.js'
   ],
   library: [
-    prefix + 'src/js/lib/apiServices.js'
+    prefix + 'src/js/utils/global.js',
+    prefix + 'src/js/lib/apiServices.js',
+    prefix + 'src/js/lib/messagingController.js'
+  ],
+  libraryAdmin: [
+    prefix + 'src/js/lib/adminController.js'
   ],
   vendorAdmin: [
     prefix + 'src/js/vendor/summernote.0.5.9.min.js'
   ],
   productionAdmin: [
-    prefix + 'build/js/vendor.admin.min.js'
+    prefix + 'build/js/vendor.admin.min.js',
+    prefix + 'build/js/library.admin.min.js'
   ],
   productionClient: [
     prefix + 'build/js/vendor.min.js',
@@ -29,6 +35,13 @@ gulp.task('library', function() {
   return gulp.src(paths.library)
     .pipe(uglify())
     .pipe(concat('library.min.js'))
+    .pipe(gulp.dest(prefix + 'build/js'));
+});
+
+gulp.task('libraryAdmin', function() {
+  return gulp.src(paths.libraryAdmin)
+    .pipe(uglify())
+    .pipe(concat('library.admin.min.js'))
     .pipe(gulp.dest(prefix + 'build/js'));
 });
 
@@ -66,6 +79,7 @@ gulp.task('productionAdmin', function() {
 
 gulp.task('watch', function() {
   gulp.watch(paths.library, ['library']);
+  gulp.watch(paths.libraryAdmin, ['libraryAdmin']);
   gulp.watch(paths.css, ['css']);
   gulp.watch(paths.vendor, ['vendor']);
   gulp.watch(paths.vendorAdmin, ['vendorAdmin']);
@@ -73,4 +87,4 @@ gulp.task('watch', function() {
   gulp.watch(paths.productionAdmin, ['productionAdmin']);
 });
 
-gulp.task('uber', ['library', 'css', 'vendor', 'vendorAdmin', 'productionClient', 'productionAdmin', 'watch']);
+gulp.task('uber', ['library', 'libraryAdmin', 'css', 'vendor', 'vendorAdmin', 'productionClient', 'productionAdmin', 'watch']);
