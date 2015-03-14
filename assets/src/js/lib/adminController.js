@@ -30,10 +30,13 @@ var adminController = (function(w,d,$,pub) {
     if (attrs.formSelector) {
       req = $(attrs.formSelector).serializeObject();
       if (req.title.length && req.body.length) {
+        $el.addClass('disabled');
         priv.saveBlog(req, function(err, data) {
           if (err) return console.log(err);
           if (data) {
-            d.location.href = '/blogs/' + data._id;
+            msg.toggle({text: 'Awesome', time: 2000, func: function() {
+              d.location.href = '/blog/' + data._id;
+            }});
           }
         });
       } else {
