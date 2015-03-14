@@ -9,11 +9,13 @@ var messagingController = (function(w,d,$,pub) {
   priv = {
     queue: [],
     log: [],
-    visible: false
+    visible: false,
+    ready: false
   };
 
   init = function() {
     $container = $(conf.selector);
+    priv.ready = true;
     processor();
   };
 
@@ -44,8 +46,7 @@ var messagingController = (function(w,d,$,pub) {
 
   pub.toggle = function(msg) {
     priv.queue.push(msg);
-    console.log(priv.queue.length);
-    processor();
+    if (priv.ready) processor();
   }
 
   $(d).ready(init);
