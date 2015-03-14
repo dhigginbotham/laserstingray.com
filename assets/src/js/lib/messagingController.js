@@ -21,9 +21,7 @@ var messagingController = (function(w,d,$,pub) {
 
   processor = function() {
     var step = function(next) {
-      var fn = (next.func ? next.func : function(){});
-      priv.log.push(next);
-      process(next.text, next.time, fn);
+      process(next);
       processor();
     };
     if (!priv.visible && priv.queue.length) {
@@ -32,16 +30,17 @@ var messagingController = (function(w,d,$,pub) {
     }
   };
 
-  process = function(text, time, fn) {
+  process = function(msg) {
+    priv.log.push(msg);
     priv.visible = true;
-    $container.find('p').text(text);
+    $container.find('p').text(msg.text);
     if ($container.hasClass('hidden')) $container.removeClass('hidden');
     w.setTimeout(function() {
       if (!priv.queue.length) $container.addClass('hidden');
       priv.visible = false;
-      fn();
+      if (msg.func) msg.func();
       processor();
-    }, time);
+    }, msg.delay);
   };
 
   pub.toggle = function(msg) {

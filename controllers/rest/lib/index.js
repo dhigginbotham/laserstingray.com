@@ -9,6 +9,7 @@ function Rest(opts, app) {
   this.key = 'collection';
   this.preware = [];
   this.afterware = [];
+  this.validate = [];
   this.model = null;
 
   // extend options
@@ -87,7 +88,7 @@ Rest.prototype.updateDocument = function _updateDocument(req, fn) {
  */
 Rest.prototype.mount = function _mount(app) {
   var url = this.prefix + this.path + '/:id?';
-  app.all(url, bodyParser.json(), this.preware, this.router, this.afterware, this.endpoint);
+  app.use(url, bodyParser.json(), this.validate, this.preware, this.router, this.afterware, this.endpoint);
   return this;
 };
 

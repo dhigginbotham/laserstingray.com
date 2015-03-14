@@ -2,6 +2,7 @@ var express = require('express');
 var app = module.exports = express();
 
 var Rest = require('./lib');
+var Validate = require('./lib/validate');
 var Blog = require('../../db/blog');
 var User = require('../../db/user');
 
@@ -17,8 +18,24 @@ function stateAuthentication(req, res, next) {
   }
 }
 
+function validateBlogPosts(req, res, next) {
+  var requiredKeys = [{
+    key: 'title', 
+    minlength: 3
+  },{
+    key: 'body',
+    minlength: 20
+  }];
+  Validate(requiredKeys, req.body, function(err, success) {
+    if (err) return res.status(400).json(err);
+    if (success) req.validatedRequest = success;
+    return next();
+  });
+}
+
 var blog = new Rest({
   model: Blog,
+  validate: validateBlogPosts,
   preware: stateAuthentication
 }, app);
 

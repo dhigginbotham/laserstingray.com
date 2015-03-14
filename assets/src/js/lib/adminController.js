@@ -32,15 +32,23 @@ var adminController = (function(w,d,$,pub) {
       if (req.title.length && req.body.length) {
         $el.addClass('disabled');
         priv.saveBlog(req, function(err, data) {
-          if (err) return console.log(err);
+          if (err) {
+            msg.toggle({
+              text: 'Validation Error: ' + JSON.stringify(err), 
+              delay: 2000, 
+              func: function() {
+                $el.removeClass('disabled');
+              }
+            });
+          }
           if (data) {
-            msg.toggle({text: 'Awesome', time: 2000, func: function() {
+            msg.toggle({text: 'Redirecting you to blog post', delay: 2000, func: function() {
               d.location.href = '/blog/' + data._id;
             }});
           }
         });
       } else {
-        msg.toggle({text: 'You must provide at least a title and content for your post', time: 2000});
+        msg.toggle({text: 'You must provide at least a title and content for your post', delay: 2000});
       }
     }
     return false;
@@ -102,7 +110,6 @@ var adminController = (function(w,d,$,pub) {
 
   return function(cfg) {
     if (cfg) $.extend(conf, cfg);
-    if (!dom.ready) $(d).ready(init);
     if (conf.debug) debug();
     return pub;
   };

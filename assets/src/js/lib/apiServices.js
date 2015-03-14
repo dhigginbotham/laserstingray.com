@@ -54,11 +54,11 @@ var apiServices = (function(w, d, $, pub) {
       if (status == 'success') {
         return fn(null, data);
       } else {
-        return fn({error: data.responseText, status: data.status}, null);
+        return fn({error: JSON.parse(data.responseText), status: data.status}, null);
       }
     };
 
-    operator = (!!~req.url.indexOf('?') ? '&' : '?');
+    operator = (!~req.url.indexOf('?') ? '?' : '&');
     options = {
       cacheBusting: false, // if not boolean, expects string to append parameter
       localStorage: false,
