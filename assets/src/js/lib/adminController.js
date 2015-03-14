@@ -37,7 +37,7 @@ var adminController = (function(w,d,$,pub) {
           }
         });
       } else {
-        msg.toggle({text: 'You must provide at least a title and content for your post', time: 5000});
+        msg.toggle({text: 'You must provide at least a title and content for your post', time: 2000});
       }
     }
     return false;

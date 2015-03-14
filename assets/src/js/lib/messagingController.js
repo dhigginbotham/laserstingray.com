@@ -33,7 +33,7 @@ var messagingController = (function(w,d,$,pub) {
 
   process = function(text, time) {
     priv.visible = true;
-    $container.find('p').text(text + ' :: ' + priv.log.length);
+    $container.find('p').text(text);
     $container.removeClass('hidden');
     w.setTimeout(function() {
       if (!priv.queue.length) {
