@@ -10,11 +10,15 @@ function findAll(req, res, next) {
 
 function find(req, res, next) {
   var query = (req.params.id ? {_id: req.params.id} : {});
-  Blog.findOne(query, null, {sort: {created_date: -1}}, function(err, data) {
-    if (err) return next(err);
-    res.locals.blog = data;
+  if (query._id) {
+    Blog.findOne(query, null, {sort: {created_date: -1}}, function(err, data) {
+      if (err) return next(err);
+      res.locals.blog = data;
+      return next();
+    });
+  } else {
     return next();
-  });
+  }
 }
 
 module.exports = {

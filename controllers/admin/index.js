@@ -5,6 +5,7 @@ var marked = require('marked');
 var moment = require('moment');
 
 var middle = require('./middle');
+var blogMiddleware = require('../../db/blog/middleware');
 
 app.set('views', config.views);
 app.set('view engine', 'jade');
@@ -27,6 +28,6 @@ app.get(prefix, middle.getBlogCount, middle.getUserCount, function(req, res, nex
   res.render('admin/dashboard');
 });
 
-app.get(prefix + '/blog' + id, function(req, res, next) {
+app.get(prefix + '/blog' + id, blogMiddleware.find, function(req, res, next) {
   res.render('admin/save');
 });

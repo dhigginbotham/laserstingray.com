@@ -10,15 +10,11 @@ block content
         .form-group
           label.col-sm-2.control-label(for="title") Title
           .col-sm-10
-            input.form-control(type="text", name="title", id="title", placeholder="Title")
-        .form-group
-          label.col-sm-2.control-label(for="slug") Slug
-          .col-sm-10
-            input.form-control(type="text", name="slug", id="slug", placeholder="Slug")
+            input.form-control(type="text", name="title", id="title", placeholder="Title", value="#{blog ? blog.title : '' }")
         .form-group
           label.col-sm-2.control-label(for="body") Content
           .col-sm-10
-            textarea.form-control(type="text", name="body", id="body")
+            textarea.form-control(type="text", name="body", id="body") #{blog ? blog.body : ''}
         .form-group
           .col-sm-12
             button.pull-right.btn.btn-primary(type="submit", id="saveBlogBtn", data-form-selector="#saveBlogForm") Save
