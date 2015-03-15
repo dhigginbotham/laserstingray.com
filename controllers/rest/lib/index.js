@@ -66,7 +66,7 @@ function Rest(opts, app) {
  * @param  {Object}   req request object supplied by express
  * @param  {Function} fn  callback function
  */
-Rest.prototype.createDocument = function _createDocument(req, fn) {
+Rest.prototype.createDocument = function(req, fn) {
   var newCollection = new this.model(req.body);
   newCollection.save(fn);
 };
@@ -76,7 +76,7 @@ Rest.prototype.createDocument = function _createDocument(req, fn) {
  * @param  {Object}   req request object supplied by express
  * @param  {Function} fn  callback function
  */
-Rest.prototype.updateDocument = function _updateDocument(req, fn) {
+Rest.prototype.updateDocument = function(req, fn) {
   var id = (req.params.id ? {_id: req.params.id} : null);
   var update = _.omit(req.body, '_id');
   this.model.update(id, update, {upsert: true}, fn);
@@ -86,7 +86,7 @@ Rest.prototype.updateDocument = function _updateDocument(req, fn) {
  * mount application to express
  * @param  {Object} app express application object
  */
-Rest.prototype.mount = function _mount(app) {
+Rest.prototype.mount = function(app) {
   var url = this.prefix + this.path + '/:id?';
   app.use(url, bodyParser.json(), this.validate, this.preware, this.router, this.afterware, this.endpoint);
   return this;
@@ -97,7 +97,7 @@ Rest.prototype.mount = function _mount(app) {
  * @param  {Object}   req request object supplied by express
  * @param  {Function} fn  callback function
  */
-Rest.prototype.get = function _get(req, fn) {
+Rest.prototype.get = function(req, fn) {
   var id = (req.params.id ? {_id: req.params.id} : {});
   this.model.find(id, fn);
 };
@@ -107,7 +107,7 @@ Rest.prototype.get = function _get(req, fn) {
  * @param  {Object}   req request object supplied by express
  * @param  {Function} fn  callback function
  */
-Rest.prototype.post = function _post(req, fn) {
+Rest.prototype.post = function(req, fn) {
   if (req.params.id) {
     this.updateDocument(req, fn);
   } else {
@@ -120,7 +120,7 @@ Rest.prototype.post = function _post(req, fn) {
  * @param  {Object}   req request object supplied by express
  * @param  {Function} fn  callback function
  */
-Rest.prototype.put = function _put(req, fn) {
+Rest.prototype.put = function(req, fn) {
   if (req.params.id) {
     this.updateDocument(req, fn);
   } else {
@@ -135,7 +135,7 @@ Rest.prototype.put = function _put(req, fn) {
  * @param  {Object}   req request object supplied by express
  * @param  {Function} fn  callback function
  */
-Rest.prototype.delete = function _delete(req, fn) {
+Rest.prototype.delete = function(req, fn) {
   var id = (req.params.id ? {_id: req.params.id} : null);
   this.model.remove(id, fn);
 };

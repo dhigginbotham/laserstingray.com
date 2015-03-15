@@ -14,7 +14,7 @@ function stateAuthentication(req, res, next) {
   if (req.canPlayRoleOf('apiUser')) {
     return next();
   } else {
-    return res.status(401).send({'error': 'user not authorized for this type of role', 'status': 401});
+    return res.status(401).json({'error': 'user not authorized for this type of role', 'status': 401});
   }
 }
 
