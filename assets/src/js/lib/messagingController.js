@@ -1,12 +1,12 @@
 var messagingController = (function(w,d,$,pub) {
 
-  var $container, conf, init, priv, process, processor;
+  var $container, conf, init, process, processor, state;
 
   conf = {
     selector: '#msgContainer'
   };
 
-  priv = {
+  state = {
     queue: [],
     log: [],
     visible: false,
@@ -15,7 +15,7 @@ var messagingController = (function(w,d,$,pub) {
 
   init = function() {
     $container = $(conf.selector);
-    priv.ready = true;
+    state.ready = true;
     processor();
   };
 
@@ -24,28 +24,28 @@ var messagingController = (function(w,d,$,pub) {
       process(next);
       processor();
     };
-    if (!priv.visible && priv.queue.length) {
-      var current = priv.queue.shift();
+    if (!state.visible && state.queue.length) {
+      var current = state.queue.shift();
       step(current);
     }
   };
 
   process = function(msg) {
-    priv.log.push(msg);
-    priv.visible = true;
+    state.log.push(msg);
+    state.visible = true;
     $container.find('p').text(msg.text);
     if ($container.hasClass('hidden')) $container.removeClass('hidden');
     w.setTimeout(function() {
-      if (!priv.queue.length) $container.addClass('hidden');
-      priv.visible = false;
+      if (!state.queue.length) $container.addClass('hidden');
+      state.visible = false;
       if (msg.func) msg.func();
       processor();
     }, msg.delay);
   };
 
   pub.toggle = function(msg) {
-    priv.queue.push(msg);
-    if (priv.ready) processor();
+    state.queue.push(msg);
+    if (state.ready) processor();
   }
 
   $(d).ready(init);
