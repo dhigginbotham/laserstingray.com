@@ -59,22 +59,15 @@ var bindController = (function(w,d,$,pub) {
     $(d).ready(init);
   };
 
-  dots = function(str, val) {
-    var arr, obj, first, traverse;
-    arr = str.split('.');
-    obj = {};
-    first = true;
-    traverse = function(next) {
-      obj = (first ? model[next] : obj[next]);
-      first = false;
-      if (arr.length) {
-        return traverse(arr.shift());
-      } else {
-        return obj = val;
-      }
-    };
-    return traverse(arr.shift());
-  };
+  dots = function(prop, obj) {
+    var parts = prop.split('.'),
+        last = parts.pop();
+    while (prop = parts.shift()) {
+      obj = obj[prop];
+      if (typeof obj !== 'object' || !obj) return;
+    }
+    return obj[last];
+  }
 
   pub.set = function(key, val) {
     model[key] = val;
