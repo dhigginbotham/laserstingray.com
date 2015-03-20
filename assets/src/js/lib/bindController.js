@@ -41,7 +41,7 @@ var bindController = (function(w,d,$,pub) {
     }
   };
 
-  pub.update = collectState = function(el) {
+  pub.update = collectState = function() {
     pub.binding = true;
     state = d.getElementsByTagName('*');
     for (var i=0;i<state.length;++i) {
