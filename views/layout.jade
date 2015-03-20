@@ -24,6 +24,11 @@ html(lang="en")
         .alert(class="alert-warning")
           p #{flash}
 
+    div(data-bind="keyName", data-val="testingValue")
+    div(data-bind="keyName2", data-val="testingValue2")
+    div(data-bind="keyName3") test
+    div(data-bind="keyName4")
+
     block content
 
     block footer

@@ -12,13 +12,13 @@ var paths = {
   library: [
     prefix + 'src/js/utils/global.js',
     prefix + 'src/js/lib/apiServices.js',
+    prefix + 'src/js/lib/bindController.js',
     prefix + 'src/js/lib/messagingController.js'
   ],
   libraryAdmin: [
     prefix + 'src/js/lib/adminController.js'
   ],
   vendorAdmin: [
-    prefix + 'src/js/vendor/summernote.0.5.9.min.js'
   ],
   productionAdmin: [
     prefix + 'build/js/vendor.admin.min.js',
