@@ -27,6 +27,12 @@ var bindController = (function(w,d,$,pub) {
             elem.setAttribute('data-bind-clean', val);
           }
           elem.setAttribute('data-bind-dirty', val);
+          var count = elem.getAttribute('data-bind-count');
+          if (count === null) {
+            elem.setAttribute('data-bind-count', 1);
+          } else {
+            elem.setAttribute('data-bind-count', ++count);
+          }
           elem.innerText = val;
         } else {
           continue;
@@ -53,7 +59,7 @@ var bindController = (function(w,d,$,pub) {
     $(d).ready(init);
   };
 
-  dots = function(str) {
+  dots = function(str, val) {
     var arr, obj, first, traverse;
     arr = str.split('.');
     obj = {};
@@ -64,15 +70,14 @@ var bindController = (function(w,d,$,pub) {
       if (arr.length) {
         return traverse(arr.shift());
       } else {
-        return obj;
+        return obj = val;
       }
     };
     return traverse(arr.shift());
   };
 
   pub.set = function(key, val) {
-    var obj = dots(key);
-    if (typeof obj !== 'undefined') obj = val;
+    model[key] = val;
     bindElements();
   };
 
