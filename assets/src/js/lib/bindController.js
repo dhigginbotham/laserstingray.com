@@ -1,7 +1,7 @@
 var bindController = (function(w,d,$,pub) {
   
   var model, ready, state, subscribers;
-  var api, bindElements, collectState, init;
+  var api, bindElements, collectState, dots, init;
 
   model = {};
   pub.binding = false;
@@ -37,9 +37,9 @@ var bindController = (function(w,d,$,pub) {
 
   pub.update = collectState = function(el) {
     pub.binding = true;
-    state = (typeof el !== 'undefined' ? el.getElementsByTagName('*') : d.getElementsByTagName('*'));
+    state = d.getElementsByTagName('*');
     for (var i=0;i<state.length;++i) {
-      var key, found, val;
+      var key, val;
       if (state[i].getAttribute('data-bound') === null) {
         key = state[i].getAttribute('data-bind');
         if (key !== null) {
@@ -53,8 +53,26 @@ var bindController = (function(w,d,$,pub) {
     $(d).ready(init);
   };
 
+  dots = function(str) {
+    var arr, obj, first, traverse;
+    arr = str.split('.');
+    obj = {};
+    first = true;
+    traverse = function(next) {
+      obj = (first ? model[next] : obj[next]);
+      first = false;
+      if (arr.length) {
+        return traverse(arr.shift());
+      } else {
+        return obj;
+      }
+    };
+    return traverse(arr.shift());
+  };
+
   pub.set = function(key, val) {
-    model[key] = val;
+    var obj = dots(key);
+    if (typeof obj !== 'undefined') obj = val;
     bindElements();
   };
 
