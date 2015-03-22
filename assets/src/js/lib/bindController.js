@@ -14,7 +14,7 @@ var bindController = (function(w,d,$,pub) {
     return pub;
   };
 
-  pub.bind = bindElements = function() {
+  pub.bindElements = bindElements = function() {
     if (ready) {
       pub.binding = false;
       for (var i=0;i<state.length;++i) {
