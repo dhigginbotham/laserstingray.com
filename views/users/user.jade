@@ -2,3 +2,33 @@ extends ../layout
 
 block content
   .container
+    .row
+      .col-sm-3
+
+      .col-sm-9
+        if (collection)
+          .panel.panel-default
+            .panel-heading: h4 User Details
+            .panel-body
+              dl.dl-horizontal
+                if (collection.first_name)
+                  dt First Name
+                  dd #{collection.first_name}
+                if (collection.last_name)
+                  dt Last Name
+                  dd #{collection.last_name}
+                if (collection.username)
+                  dt Username
+                  dd #{collection.username}
+                if (collection.email)
+                  dt Email Address
+                  dd #{collection.email}
+                if (collection.role)
+                  dt Role
+                  dd #{collection.role}
+                if (collection.updated_date)
+                  dt Updated Date
+                  dd #{collection.updated_date}
+                if (collection.ip)
+                  dt IP Address
+                  dd #{collection.ip}

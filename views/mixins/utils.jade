@@ -1,0 +1,5 @@
+mixin properCaseStr(str)
+  - var proper, sub
+  - sub = str.substr(1,str.length)
+  - proper = str[0].toUpperCase() + sub
+  |#{proper}

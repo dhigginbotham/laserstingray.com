@@ -10,7 +10,7 @@ block content
           th Email
           th(width="20%") ID
       tbody
-        each user in users
+        each user in collection
           tr
             td: a(href="/users/#{user.id}")=user.username
             td=user.email

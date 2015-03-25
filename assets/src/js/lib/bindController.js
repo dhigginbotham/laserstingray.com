@@ -41,7 +41,7 @@ var bindController = (function(w,d,$,pub) {
     }
   };
 
-  pub.update = collectState = function() {
+  pub.update = collectState = function(fn) {
     pub.binding = true;
     state = d.getElementsByTagName('*');
     for (var i=0;i<state.length;++i) {
@@ -56,18 +56,18 @@ var bindController = (function(w,d,$,pub) {
         }
       }
     }
-    $(d).ready(init);
+    if (fn) fn();
   };
 
-  dots = function(prop, obj) {
-    var parts = prop.split('.'),
-        last = parts.pop();
-    while (prop = parts.shift()) {
-      obj = obj[prop];
+  dots = function(key, obj) {
+    var parts = key.split('.');
+    var last = parts.pop();
+    while (key = parts.shift()) {
+      obj = obj[key];
       if (typeof obj !== 'object' || !obj) return;
     }
     return obj[last];
-  }
+  };
 
   pub.set = function(key, val) {
     model[key] = val;
@@ -75,13 +75,15 @@ var bindController = (function(w,d,$,pub) {
   };
 
   init = function() {
-    ready = true;
+    if (!ready) ready = true;
     bindElements();
     pub.model = model;
     pub.state = state;
   };
 
-  collectState();
+  collectState(function() {
+    $(d).ready(init);
+  });
 
   return api;
 
