@@ -45,7 +45,8 @@ var bindController = (function(w,d,$,pub) {
   pub.update = collectState = function(context, fn) {
     pub.binding = true;
     var ctx, dom;
-    if (typeof context == 'function' && typeof fn == 'undefined') {
+    if (typeof context == 'function' && 
+        typeof fn == 'undefined') {
       fn = context;
       context = null;
     }
@@ -56,7 +57,9 @@ var bindController = (function(w,d,$,pub) {
       if (dom[i].getAttribute('data-bound') === null) {
         key = dom[i].getAttribute('data-bind');
         if (key !== null) {
-          val = (dom[i].innerHTML ? dom[i].innerHTML : dom[i].getAttribute('data-bind-first'));
+          val = (dom[i].innerHTML ? 
+                  dom[i].innerHTML : 
+                  dom[i].getAttribute('data-bind-first'));
           if (!~key.indexOf('.')) {
             model[key] = (val && !model[key] ? val : null);
           }
@@ -74,7 +77,8 @@ var bindController = (function(w,d,$,pub) {
     if (typeof key != 'undefined') {
       for (var i=0;i<state.length;++i) {
         var elem = state[i];
-        if (elem.getAttribute('data-bind') == key && elem.getAttribute('data-bind-first') !== null) {
+        if (elem.getAttribute('data-bind') == key && 
+            elem.getAttribute('data-bind-first') !== null) {
           pub.set(key, decodeURIComponent(elem.getAttribute('data-bind-first')));
         }
       }
@@ -83,9 +87,7 @@ var bindController = (function(w,d,$,pub) {
 
   pub.set = function(key, val, all) {
     model[key] = val;
-    if (all) {
-      key = null;  
-    }
+    if (all) key = null;
     bindElements(key);
     return pub;
   };
