@@ -22,7 +22,7 @@ var bindController = (function(w,d,$,pub) {
         var count, elem, val, k;
         elem = state[i];
         k = (typeof key != 'undefined' ? key : elem.getAttribute('data-bind'));
-        val = model[k];
+        val = (!~k.indexOf('.') ? model[k] : dotLookup(k, model));
         if (k == elem.getAttribute('data-bind')) {
           if (typeof val != 'undefined') {
             if (!elem.getAttribute('data-bound')) elem.setAttribute('data-bound', true);
@@ -59,7 +59,9 @@ var bindController = (function(w,d,$,pub) {
         key = dom[i].getAttribute('data-bind');
         if (key !== null) {
           val = (dom[i].innerHTML ? dom[i].innerHTML : dom[i].getAttribute('data-bind-value'));
-          model[key] = (val && !model[key] ? val : null);
+          if (!~key.indexOf('.')) {
+            model[key] = (val && !model[key] ? val : null);
+          }
           state.push(dom[i]);
         } else {
           continue;
