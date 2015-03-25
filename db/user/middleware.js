@@ -1,10 +1,6 @@
-var mongoose = require('mongoose');
-var ObjectId = mongoose.Schema.Types.ObjectId;
 var User = require('./');
 
-console.log(typeof ObjectId);
-
-function defCallback(next, res) {
+function defCallback(res, next) {
   return function(err, data) {
     if (err) return next(err);
     res.locals.collection = data;
@@ -13,12 +9,12 @@ function defCallback(next, res) {
 }
 
 function findAll(req, res, next) {
-  User.find({}, null, {sort: {created_date: -1}}, defCallback(next, res));
+  User.find({}, null, {sort: {created_date: -1}}, defCallback(res, next));
 }
 
 function find(req, res, next) {
   var query = (req.params.id ? {_id: req.params.id} : {});
-  User.findOne(query, null, {sort: {created_date: -1}}, defCallback(next, res));
+  User.findOne(query, null, {sort: {created_date: -1}}, defCallback(res, next));
 }
 
 module.exports = {

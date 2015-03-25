@@ -24,10 +24,10 @@ html(lang="en")
         .alert(class="alert-warning")
           p #{flash}
 
-    //- div(data-bind="keyName", data-bind-clean="testingValue")
-    //- div(data-bind="keyName2", data-bind-clean="testingValue2")
-    //- div(data-bind="keyName3") test
-    //- div(data-bind="keyName4")
+    div(data-bind="keyName", data-bind-value="testingValue")
+    div(data-bind="keyName2", data-bind-value="testingValue2")
+    div(data-bind="keyName3") test
+    div(data-bind="keyName4")
 
     block content
 
