@@ -20,25 +20,26 @@ var bindController = (function(w,d,$,pub) {
       for (var i=0;i<state.length;++i) {
         var count, elem, val, k;
         elem = state[i];
-        k = (typeof key != 'undefined' ? key : elem.getAttribute('data-bind'));
+        k = (key ? key : elem.getAttribute('data-bind'));
         val = (!~k.indexOf('.') ? model[k] : dotLookup(k, model));
         if (k == elem.getAttribute('data-bind') && typeof val != 'undefined') {
           if (!elem.getAttribute('data-bound')) elem.setAttribute('data-bound', true);
-          if (elem.getAttribute('data-bind-value') == null) {
-            elem.setAttribute('data-bind-value', val);
+          if (elem.getAttribute('data-bind-first') === null) {
+            elem.setAttribute('data-bind-first', encodeURIComponent(val));
           }
           count = elem.getAttribute('data-bind-count');
           if (count === null) {
             elem.setAttribute('data-bind-count', 1);
           } else {
-            elem.setAttribute('data-bind-count', ++count);
+            elem.setAttribute('data-bind-count', count+1);
           }
           elem.innerHTML = val;
         } else {
           continue;
-        }          
+        }
       }
     }
+    return pub;
   };
 
   pub.update = collectState = function(context, fn) {
@@ -55,7 +56,7 @@ var bindController = (function(w,d,$,pub) {
       if (dom[i].getAttribute('data-bound') === null) {
         key = dom[i].getAttribute('data-bind');
         if (key !== null) {
-          val = (dom[i].innerHTML ? dom[i].innerHTML : dom[i].getAttribute('data-bind-value'));
+          val = (dom[i].innerHTML ? dom[i].innerHTML : dom[i].getAttribute('data-bind-first'));
           if (!~key.indexOf('.')) {
             model[key] = (val && !model[key] ? val : null);
           }
@@ -66,11 +67,27 @@ var bindController = (function(w,d,$,pub) {
       }
     }
     if (typeof fn != 'undefined') fn();
+    return pub;
   };
 
-  pub.set = function(key, val) {
+  pub.orig = function(key) {
+    if (typeof key != 'undefined') {
+      for (var i=0;i<state.length;++i) {
+        var elem = state[i];
+        if (elem.getAttribute('data-bind') == key && elem.getAttribute('data-bind-first') !== null) {
+          pub.set(key, decodeURIComponent(elem.getAttribute('data-bind-first')));
+        }
+      }
+    }
+  };
+
+  pub.set = function(key, val, all) {
     model[key] = val;
+    if (all) {
+      key = null;  
+    }
     bindElements(key);
+    return pub;
   };
 
   init = function() {
