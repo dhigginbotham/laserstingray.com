@@ -26,7 +26,7 @@ var bindController = (function(w,d,$,pub) {
         if (k == elem.getAttribute('data-bind')) {
           if (typeof val != 'undefined') {
             if (!elem.getAttribute('data-bound')) elem.setAttribute('data-bound', true);
-            if (elem.getAttribute('data-bind-value') === null) {
+            if (elem.getAttribute('data-bind-value') == null) {
               elem.setAttribute('data-bind-value', val);
             }
             count = elem.getAttribute('data-bind-count');
