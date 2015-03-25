@@ -67,6 +67,8 @@ var bindController = (function(w,d,$,pub) {
         } else {
           continue;
         }
+      } else {
+        continue;
       }
     }
     if (typeof fn != 'undefined') fn();
@@ -79,10 +81,11 @@ var bindController = (function(w,d,$,pub) {
         var elem = state[i];
         if (elem.getAttribute('data-bind') == key && 
             elem.getAttribute('data-bind-first') !== null) {
-          pub.set(key, decodeURIComponent(elem.getAttribute('data-bind-first')));
-        }
+          return pub.set(key, decodeURIComponent(elem.getAttribute('data-bind-first')));
+        } 
       }
     }
+    return false;
   };
 
   pub.set = function(key, val, all) {
