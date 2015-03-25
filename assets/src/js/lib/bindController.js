@@ -1,13 +1,12 @@
 var bindController = (function(w,d,$,pub) {
   
-  var model, ready, state, subscribers;
+  var model, ready, state;
   var api, bindElements, collectState, dots, init;
 
   model = {};
   pub.binding = false;
   ready = false;
   state = [];
-  subscribers = {};
 
   api = function(context) {
     if (typeof context == 'object') $.extend(model, context);
@@ -23,23 +22,21 @@ var bindController = (function(w,d,$,pub) {
         elem = state[i];
         k = (typeof key != 'undefined' ? key : elem.getAttribute('data-bind'));
         val = (!~k.indexOf('.') ? model[k] : dotLookup(k, model));
-        if (k == elem.getAttribute('data-bind')) {
-          if (typeof val != 'undefined') {
-            if (!elem.getAttribute('data-bound')) elem.setAttribute('data-bound', true);
-            if (elem.getAttribute('data-bind-value') == null) {
-              elem.setAttribute('data-bind-value', val);
-            }
-            count = elem.getAttribute('data-bind-count');
-            if (count === null) {
-              elem.setAttribute('data-bind-count', 1);
-            } else {
-              elem.setAttribute('data-bind-count', ++count);
-            }
-            elem.innerHTML = val;
-          } else {
-            continue;
+        if (k == elem.getAttribute('data-bind') && typeof val != 'undefined') {
+          if (!elem.getAttribute('data-bound')) elem.setAttribute('data-bound', true);
+          if (elem.getAttribute('data-bind-value') == null) {
+            elem.setAttribute('data-bind-value', val);
           }
-        }
+          count = elem.getAttribute('data-bind-count');
+          if (count === null) {
+            elem.setAttribute('data-bind-count', 1);
+          } else {
+            elem.setAttribute('data-bind-count', ++count);
+          }
+          elem.innerHTML = val;
+        } else {
+          continue;
+        }          
       }
     }
   };
