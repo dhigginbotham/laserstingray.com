@@ -13,6 +13,4 @@ nav(role="navigation").navbar.navbar-inverse.navbar-static-top
       if (!user)
         li: a(href="/auth") Login
       else
-        li: a(href="/users/#{user.id}")
-          +properCaseStr(user.username)
         li: a(href="/auth/logout") Logout

@@ -1,6 +1,6 @@
 var adminController = (function(w,d,$,pub) {
 
-  var api, bind, conf, debug, dom, events, init, msg, priv;
+  var api, bindElems, conf, debug, dom, events, init, msg, priv;
 
   api = apiServices();
   msg = messagingController();
@@ -77,7 +77,7 @@ var adminController = (function(w,d,$,pub) {
     return api.delete('blogs', {id: id}, fn);
   };
 
-  bind = function() {
+  bindElems = function() {
     if (!events.bound) {
       events.bound = true;
       if (dom[conf.saveBlog].length) {
@@ -102,7 +102,7 @@ var adminController = (function(w,d,$,pub) {
       dom.ready = true;
       dom[conf.saveBlog] = $(conf.saveBlog);
       dom[conf.deleteBlog] = $(conf.deleteBlog);
-      bind();
+      bindElems();
     }
   };
 

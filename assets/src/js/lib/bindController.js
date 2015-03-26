@@ -31,7 +31,7 @@ var bindController = (function(w,d,$,pub) {
           if (count === null) {
             elem.setAttribute('data-bind-count', 1);
           } else {
-            elem.setAttribute('data-bind-count', count+1);
+            elem.setAttribute('data-bind-count', parseInt(count)+1);
           }
           elem.innerHTML = val;
         } else {
