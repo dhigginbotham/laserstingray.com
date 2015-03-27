@@ -19,16 +19,17 @@ var bindController = (function(w,d,$,pub) {
   pub.bindElements = bindElements = function(key) {
     if (ready) {
       for (var i=0;i<state.length;++i) {
-        var count, elem, val, k;
+        var count, elem, dirty, val, k;
         elem = state[i];
         k = (key ? key : elem.getAttribute('data-bind'));
         val = (!~k.indexOf('.') ? model[k] : get(k, model));
-        if (elem.innerHTML && elem.innerHTML == val) continue;
+        dirty = elem.innerHTML;
+        if (dirty && dirty == val) continue;
         if (k == elem.getAttribute('data-bind') && typeof val != 'undefined') {
           if (!elem.getAttribute('data-bound')) elem.setAttribute('data-bound', true);
           if (val && elem.getAttribute('data-bind-first') === null) elem.setAttribute('data-bind-first', encodeURIComponent(val));
           if (val && elem.getAttribute('data-bind-last') === null) elem.setAttribute('data-bind-last', val);
-          if (elem.innerHTML && elem.getAttribute('data-bind-last') != elem.innerHTML) elem.setAttribute('data-bind-last', elem.innerHTML);
+          if (dirty && elem.getAttribute('data-bind-last') != dirty) elem.setAttribute('data-bind-last', dirty);
           count = elem.getAttribute('data-bind-count');
           if (count === null) {
             elem.setAttribute('data-bind-count', 1);
