@@ -1,10 +1,12 @@
 var bindController = (function(w,d,$,pub) {
   
   var model, ready, state;
-  var api, bindElements, collectState, dots, init;
+  var api, bindElements, collectState, get, init, set;
 
+  get = helperUtils.get;
+  set = helperUtils.set;
+  
   model = {};
-  pub.binding = false;
   ready = false;
   state = [];
 
@@ -16,22 +18,23 @@ var bindController = (function(w,d,$,pub) {
 
   pub.bindElements = bindElements = function(key) {
     if (ready) {
-      pub.binding = false;
       for (var i=0;i<state.length;++i) {
         var count, elem, val, k;
         elem = state[i];
         k = (key ? key : elem.getAttribute('data-bind'));
-        val = (!~k.indexOf('.') ? model[k] : dotLookup(k, model));
+        val = (!~k.indexOf('.') ? model[k] : get(k, model));
         if (k == elem.getAttribute('data-bind') && typeof val != 'undefined') {
           if (!elem.getAttribute('data-bound')) elem.setAttribute('data-bound', true);
-          if (elem.getAttribute('data-bind-first') === null) {
+          if (val && elem.getAttribute('data-bind-first') === null) {
             elem.setAttribute('data-bind-first', encodeURIComponent(val));
           }
+          if (val && elem.getAttribute('data-bind-last') === null) elem.setAttribute('data-bind-last', val);
+          if (elem.innerHTML && elem.getAttribute('data-bind-last') != elem.innerHTML) elem.setAttribute('data-bind-last', elem.innerHTML);
           count = elem.getAttribute('data-bind-count');
           if (count === null) {
             elem.setAttribute('data-bind-count', 1);
           } else {
-            elem.setAttribute('data-bind-count', parseInt(count)+1);
+            elem.setAttribute('data-bind-count', parseFloat(count) + 1);
           }
           elem.innerHTML = val;
         } else {
@@ -43,7 +46,6 @@ var bindController = (function(w,d,$,pub) {
   };
 
   pub.update = collectState = function(context, fn) {
-    pub.binding = true;
     var ctx, dom;
     if (typeof context == 'function' && 
         typeof fn == 'undefined') {
@@ -60,9 +62,7 @@ var bindController = (function(w,d,$,pub) {
           val = (dom[i].innerHTML ? 
                   dom[i].innerHTML : 
                   dom[i].getAttribute('data-bind-first'));
-          if (!~key.indexOf('.')) {
-            model[key] = (val && !model[key] ? val : null);
-          }
+          set(model, key, val);
           state.push(dom[i]);
         } else {
           continue;
@@ -75,21 +75,26 @@ var bindController = (function(w,d,$,pub) {
     return pub;
   };
 
-  pub.orig = function(key) {
-    if (typeof key != 'undefined') {
+  pub.revert = function(type, key) {
+    var types = ['first', 'last'];
+    if (typeof key == 'undefined') {
+      key = type;
+      type = 'first';
+    }
+    if (types.indexOf(type) > -1) {
       for (var i=0;i<state.length;++i) {
         var elem = state[i];
         if (elem.getAttribute('data-bind') == key && 
-            elem.getAttribute('data-bind-first') !== null) {
-          return pub.set(key, decodeURIComponent(elem.getAttribute('data-bind-first')));
+            elem.getAttribute('data-bind-' + type) !== null) {
+          return pub.set(key, decodeURIComponent(elem.getAttribute('data-bind-' + type)));
         } 
       }
     }
-    return false;
+    return pub;
   };
 
   pub.set = function(key, val, all) {
-    model[key] = val;
+    set(model, key, val);
     if (all) key = null;
     bindElements(key);
     return pub;

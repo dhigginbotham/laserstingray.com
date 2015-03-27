@@ -11,6 +11,7 @@ var paths = {
   ],
   library: [
     prefix + 'src/js/utils/global.js',
+    prefix + 'src/js/utils/helpers.js',
     prefix + 'src/js/lib/apiServices.js',
     prefix + 'src/js/lib/bindController.js',
     prefix + 'src/js/lib/messagingController.js'
