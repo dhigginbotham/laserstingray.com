@@ -5,7 +5,7 @@ var bindController = (function(w,d,$,pub) {
 
   get = helperUtils.get;
   set = helperUtils.set;
-  
+
   model = {};
   ready = false;
   state = [];
@@ -23,6 +23,7 @@ var bindController = (function(w,d,$,pub) {
         elem = state[i];
         k = (key ? key : elem.getAttribute('data-bind'));
         val = (!~k.indexOf('.') ? model[k] : get(k, model));
+        if (elem.innerHTML && elem.innerHTML == val) continue;
         if (k == elem.getAttribute('data-bind') && typeof val != 'undefined') {
           if (!elem.getAttribute('data-bound')) elem.setAttribute('data-bound', true);
           if (val && elem.getAttribute('data-bind-first') === null) {
