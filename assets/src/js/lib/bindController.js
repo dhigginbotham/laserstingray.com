@@ -23,7 +23,7 @@ var bindController = (function(w,d,$,pub) {
         elem = state[i];
         k = (key ? key : elem.getAttribute('data-bind'));
         val = (!~k.indexOf('.') ? model[k] : get(k, model));
-        dirty = elem.innerHTML;
+        dirty = (elem.type ? elem.getAttribute('value') : elem.innerHTML);
         if (dirty && dirty == val) continue;
         if (k == elem.getAttribute('data-bind') && typeof val != 'undefined') {
           if (!elem.getAttribute('data-bound')) elem.setAttribute('data-bound', true);
@@ -36,7 +36,11 @@ var bindController = (function(w,d,$,pub) {
           } else {
             elem.setAttribute('data-bind-count', parseFloat(count) + 1);
           }
-          elem.innerHTML = val;
+          if (elem.type) {
+            elem.setAttribute('value', val);
+          } else {
+            elem.innerHTML = val;
+          }
         } else {
           continue;
         }

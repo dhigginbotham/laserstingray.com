@@ -19,6 +19,7 @@ var adminController = (function(w,d,$,pub) {
   conf = {
     saveBlog: '#saveBlogBtn',
     deleteBlog: '#deleteBlogBtn',
+    slug: '#slug',
     debug: true
   };
 
@@ -42,9 +43,8 @@ var adminController = (function(w,d,$,pub) {
             });
           }
           if (data) {
-            msg.toggle({text: 'Redirecting you to blog post', delay: 2000, func: function() {
-              d.location.href = '/blog/' + data._id;
-            }});
+            msg.toggle({text: 'Saved Post', delay: 2000});
+            $el.removeClass('disabled');
           }
         });
       } else {
@@ -69,6 +69,13 @@ var adminController = (function(w,d,$,pub) {
     }
   };
 
+  events.createSlug = function(e) {
+    var $el, $title;
+    $el = $(this);
+    $title = $('#title');
+    $el.val(!$el.val() ? helperUtils.slug($title.val()) : helperUtils.slug($el.val()));
+  };
+
   priv.saveBlog = function(req, fn) {
     return api.post('blogs', req, fn);
   };
@@ -88,6 +95,10 @@ var adminController = (function(w,d,$,pub) {
         dom[conf.deleteBlog].on('click', events.deleteBlog);
         events.tracking.push(conf.deleteBlog);
       }
+      if (dom[conf.slug].length) {
+        dom[conf.slug].on('blur', events.createSlug);
+        events.tracking.push(conf.slug);
+      }
     }
   };
 
@@ -102,6 +113,7 @@ var adminController = (function(w,d,$,pub) {
       dom.ready = true;
       dom[conf.saveBlog] = $(conf.saveBlog);
       dom[conf.deleteBlog] = $(conf.deleteBlog);
+      dom[conf.slug] = $(conf.slug);
       bindElems();
     }
   };

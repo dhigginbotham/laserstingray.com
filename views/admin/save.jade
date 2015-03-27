@@ -7,14 +7,30 @@ block content
       h1 Blog Editor
       hr
       form.form-horizontal(method="post", id="saveBlogForm")
+        if (blog && blog.id)
+          input(type="hidden", value=blog.id, name="id")
+        input(type="hidden", value=user.id, name="author")
         .form-group
           label.col-sm-2.control-label(for="title") Title
           .col-sm-10
             input.form-control(type="text", name="title", id="title", placeholder="Title", value="#{blog ? blog.title : '' }")
         .form-group
+          label.col-sm-2.control-label(for="slug") Slug
+          .col-sm-10
+            input.form-control(type="text", name="slug", id="slug", placeholder="Slug", value="#{blog ? blog.slug : '' }")
+        .form-group
           label.col-sm-2.control-label(for="body") Content
           .col-sm-10
             textarea.form-control(type="text", name="body", id="body") #{blog ? blog.body : ''}
+        .form-group
+          label.col-sm-2.control-label(for="publishedYes") Published?
+          .col-sm-10
+            label
+              input(type="radio", name="published", value="true", id="publishedYes")
+              |  Yes
+            label
+              input(type="radio", name="published", value="false", id="publishedNo")
+              |  No
         .form-group
           .col-sm-12
             button.pull-right.btn.btn-primary(type="submit", id="saveBlogBtn", data-form-selector="#saveBlogForm") Save

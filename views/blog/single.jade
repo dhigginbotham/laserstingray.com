@@ -10,3 +10,6 @@ block content
     hr
     if (blog.body)
       P !{marked(blog.body)}
+    if (hasRoleOf('admin'))
+      .well
+        a(href="/admin/blog/#{blog.id}") Edit Blog?
