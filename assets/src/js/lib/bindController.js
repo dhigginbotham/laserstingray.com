@@ -26,9 +26,7 @@ var bindController = (function(w,d,$,pub) {
         if (elem.innerHTML && elem.innerHTML == val) continue;
         if (k == elem.getAttribute('data-bind') && typeof val != 'undefined') {
           if (!elem.getAttribute('data-bound')) elem.setAttribute('data-bound', true);
-          if (val && elem.getAttribute('data-bind-first') === null) {
-            elem.setAttribute('data-bind-first', encodeURIComponent(val));
-          }
+          if (val && elem.getAttribute('data-bind-first') === null) elem.setAttribute('data-bind-first', encodeURIComponent(val));
           if (val && elem.getAttribute('data-bind-last') === null) elem.setAttribute('data-bind-last', val);
           if (elem.innerHTML && elem.getAttribute('data-bind-last') != elem.innerHTML) elem.setAttribute('data-bind-last', elem.innerHTML);
           count = elem.getAttribute('data-bind-count');
