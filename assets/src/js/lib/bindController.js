@@ -105,7 +105,7 @@ var bindController = (function(w,d,$,pub) {
 
   pub.revert = function(type, key) {
     var types = ['first', 'last'];
-    if (typeof key == 'undefined') {
+    if (typeof type == 'undefined') {
       key = type;
       type = 'first';
     }
