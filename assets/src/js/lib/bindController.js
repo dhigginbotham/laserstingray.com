@@ -85,13 +85,12 @@ var bindController = (function(w,d,$,pub) {
     ctx = (context ? context : d);
     dom = ctx.getElementsByTagName('*');
     for (var i=0;i<dom.length;++i) {
-      var key, val;
+      var inner, key, val;
       if (dom[i].getAttribute('data-bound') === null) {
         key = dom[i].getAttribute('data-bind');
         if (key !== null) {
-          val = (dom[i].innerHTML ? 
-                  dom[i].innerHTML : 
-                  dom[i].getAttribute('data-bind-first'));
+          inner = (dom[i].type ? dom[i].getAttribute('value') : dom[i].innerHTML);
+          val = (inner ? inner : dom[i].getAttribute('data-bind-first'));
           set(model, key, val);
           state.push(dom[i]);
         } else {
@@ -137,7 +136,7 @@ var bindController = (function(w,d,$,pub) {
   };
 
   collectState();
-  
+
   $(d).ready(init);
 
   return api;
