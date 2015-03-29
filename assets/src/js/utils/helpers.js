@@ -43,31 +43,18 @@ var helperUtils = (function(w,d,$,pub) {
     return str.toLowerCase()
               .replace(/ /g,'-')
               .replace(/[^\w-]+/g,'');
-  };
+  };;
 
-  var data = pub.data = function (elem) {
+  var data = pub.data = function(elem) {
     if (!elem) return {};
-    var d = {};
-    for (var i = 0; i < elem.attributes.length; ++i) {
-      var clean, dirty, key, val, arr;
-      if (elem.attributes[i] == '[object Attr]') {
-        clean = [];
-        key = (elem.attributes[i].name ? elem.attributes[i].name : null);
-        val = (elem.attributes[i].value ? elem.attributes[i].value : null);
-        arr = key.match(/data-(.*)/gi);
-        if (arr instanceof Array) {
-          dirty = arr[0].replace('data-', '')
-              .split('-');
-          for (var j = 0; j < dirty.length; ++j) {
-            var parsed = (j < 1 ? dirty[j] : properCaseStr(dirty[j]));
-            clean.push(parsed);
-          }
-          clean = clean.join('');
-          d[clean] = val;
-        }
+    var attrs, data = {};
+    attrs = elem.attributes;
+    for (var i=0;i<attrs.length;++i) {
+      if (attrs[i].name.indexOf('data-') > -1) {
+        data[attrs.substr(5, attrs.name.length-5)] = attrs[i].value;
       }
     }
-    return d;
+    return data;
   };
 
   var properCaseStr = pub.properCaseStr = function(str) {
