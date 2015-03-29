@@ -16,17 +16,17 @@ var helperUtils = (function(w,d,$,pub) {
     return obj[last];
   };
 
-  var namespace = function(o, path) {
-    if (!path) return o;
+  var namespace = function(obj, path) {
+    if (!path) return obj;
     var paths = path.split('.');
     for (var i=0;i<paths.length;++i) {
       var key = paths[i];
-      if (!o[key]) {
-        o[key] = {};
+      if (!obj[key]) {
+        obj[key] = {};
       }
-      o = o[key];
+      obj = obj[key];
     }
-    return o;
+    return obj;
   };
 
   var set = pub.set = function(obj, prop, val) {
@@ -45,14 +45,22 @@ var helperUtils = (function(w,d,$,pub) {
               .replace(/[^\w-]+/g,'');
   };
 
-  var data = pub.data = function(elem) {
+  var data = pub.data = function(elem, key, val) {
     if (!elem) return {};
     var attrs, data = {};
     attrs = elem.attributes;
     for (var i=0;i<attrs.length;++i) {
+      var k;
       if (attrs[i].name.indexOf('data-') > -1) {
-        data[attrs.substr(5, attrs.name.length-5)] = attrs[i].value;
+        k = attrs[i].name.substr(5, attrs[i].name.length-5);
+        if (key == k && typeof val == 'undefined') return attrs[i].value;
+        if (key == k && typeof val != 'undefined') attrs[i].value = val;
+        data[k] = attrs[i].value;
       }
+    }
+    if (!data.hasOwnProperty(key) && typeof val != 'undefined') {
+      data[key] = val;
+      elem.setAttribute(key, val);
     }
     return data;
   };
@@ -64,7 +72,7 @@ var helperUtils = (function(w,d,$,pub) {
     sub = str.substr(1,str.length);
     proper = str[0].toUpperCase() + sub;
     return proper;
-  }
+  };
 
   return pub;
 
