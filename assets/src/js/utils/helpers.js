@@ -43,7 +43,7 @@ var helperUtils = (function(w,d,$,pub) {
     return str.toLowerCase()
               .replace(/ /g,'-')
               .replace(/[^\w-]+/g,'');
-  };;
+  };
 
   var data = pub.data = function(elem) {
     if (!elem) return {};
