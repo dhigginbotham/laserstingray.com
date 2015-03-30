@@ -51,7 +51,7 @@ var helperUtils = (function(w,d,$,pub) {
     attrs = elem.attributes;
     for (var i=0;i<attrs.length;++i) {
       var k;
-      if (attrs[i].name.indexOf('data-') > -1) {
+      if (attrs[i].name.indexOf('data-') === 0) {
         k = attrs[i].name.substr(5, attrs[i].name.length-5);
         if (key == k && typeof val == 'undefined') return attrs[i].value;
         if (key == k && typeof val != 'undefined') attrs[i].value = val;
