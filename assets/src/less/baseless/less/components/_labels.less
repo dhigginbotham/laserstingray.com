@@ -1,0 +1,65 @@
+// Labels
+// 
+// labels, idk what to say about them, they're helpful
+// 
+// Markup: docs/labels.hbs
+// 
+// .primary - primary label color
+// .success - success label color
+// .warning - warning label color
+// .notice - notice label color
+// .info - info label color
+// .inverted - inverted label color
+// .primary.small.box - small box label
+// .primary.small - small label size
+// .primary.mini - mini label size
+// .primary.large - large label size
+//
+// Styleguide 2.5. 
+
+.label-accent(@bg: @color-grey-default, @color: @color-inverted) {
+  background: @bg;
+  color: @color;
+}
+
+.@{css-prefix}label {
+  .reset-spacing(0, 0 7px 2px);
+  border-radius: 15px;
+  display: inline-block;
+  font-weight: 700;
+  text-align: center;
+  font-size: @typo-font-size-base;
+  cursor: default;
+  .disable-selection();
+  &.small {
+    font-size: @typo-font-size-small;
+  }
+  &.large {
+    font-size: @typo-font-size-large;
+  }
+  &.mini {
+    font-size: @typo-font-size-mini;
+  }
+  .label-accent();
+  &.box {
+    border-radius: 3px;
+  }
+  &.primary {
+    .label-accent(@color-primary, @color-light);
+  }
+  &.success {
+    .label-accent(@color-success, @color-light);
+  }
+  &.warning {
+    .label-accent(@color-warning, @color-light);
+  }
+  &.notice {
+    .label-accent(@color-notice, @color-light);
+  }
+  &.info {
+    .label-accent(@color-info, @color-inverted);
+  }
+  &.inverted {
+    .label-accent(@color-inverted, @color-light);
+  }
+}

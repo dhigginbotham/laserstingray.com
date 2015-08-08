@@ -20,16 +20,13 @@ html(lang="en")
     include navbar
 
     if (flash)
-      .container
-        .alert(class="alert-warning")
-          p #{flash}
+      p #{flash}
 
-    div(data-bind="sausage", data-bind-first="something")
     block content
 
     block footer
-      footer.clearfix.container
-        p.pull-right.text-primary Copyright #{globalVars.copyrightDate} #{globalVars.appName}
+      footer.cf.container
+        p.pr.text-primary Copyright #{globalVars.copyrightDate} #{globalVars.appName}
     
     block footerScripts
       script(type="text/javascript", src="/js/client.min.js")

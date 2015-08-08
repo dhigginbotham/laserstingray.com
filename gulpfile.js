@@ -6,15 +6,10 @@ var prefix = 'assets/';
 var paths = {
   vendor: [
     prefix + 'src/js/vendor/modernizr.2.7.1.min.js',
-    prefix + 'src/js/vendor/jquery.1.11.1.min.js',
-    prefix + 'src/js/vendor/bootstrap.3.0.3.min.js'
+    prefix + 'src/js/vendor/jquery.1.11.1.min.js'
   ],
   library: [
-    prefix + 'src/js/utils/global.js',
-    prefix + 'src/js/utils/helpers.js',
-    prefix + 'src/js/lib/apiServices.js',
-    prefix + 'src/js/lib/bindController.js',
-    prefix + 'src/js/lib/messagingController.js'
+    prefix + 'src/js/utils/global.js'
   ],
   libraryAdmin: [
     prefix + 'src/js/lib/adminController.js'
@@ -29,7 +24,7 @@ var paths = {
     prefix + 'build/js/vendor.min.js',
     prefix + 'build/js/library.min.js'
   ],
-  css: [prefix + 'src/css/**/*.css']
+  css: [prefix + 'src/less/**/_style.less']
 };
 
 gulp.task('library', function() {

@@ -1,0 +1,88 @@
+// Helpers
+// 
+// Common use helper classes
+// 
+// - `.cf`, `.clearfix` typical clearfix you would expect
+// - `.pr`, `.pl`, `.pull-right`, `.pull-left` floats an element to either direction
+// - `.text-right`, `.text-left`, `.text-center` aligns text to direction
+// - `.center-block` centers a block element
+// 
+// Styleguide 1.3.
+
+//
+// .clearfix, .cf
+// more info @ https://css-tricks.com/snippets/css/clear-fix/
+//
+
+.cf, 
+.clearfix {
+  .clearfix();
+}
+
+//
+// .pull-right, .pull-left, .pr, .pl
+//
+
+.pr,
+.pull-right {
+  float: right;
+}
+
+.pl,
+.pull-left {
+  float: left;
+}
+
+//
+// .text-right, .text-left, .text-center
+//
+
+.text-color-accent(@color: @color-inverted) {
+  color: @color;
+}
+
+.text-primary {
+  .text-color-accent(@color-primary)
+}
+
+.text-success {
+  .text-color-accent(@color-success)
+}
+
+.text-warning {
+  .text-color-accent(@color-warning)
+}
+
+.text-notice {
+  .text-color-accent(@color-notice)
+}
+
+.text-info {
+  .text-color-accent(@color-info)
+}
+
+.text-inverted {
+  .text-color-accent(@color-inverted)
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+//
+// .center-block
+// helpful when you want to center a block element
+// like an image or something
+//
+
+.center-block {
+  .center-block();
+}

@@ -3,32 +3,3 @@ extends ../layout
 block content
   .container
     h1 Welcome to the Admin Dashboard
-    hr
-    .row
-      .col-md-3.col-xs-6
-        .panel.panel-default(style="min-height:150px;")
-          .panel-heading 
-            a(href="/admin/blog"): strong Create Post
-          .panel-body
-            p Create a new blog post, this is what you're supposed to do on the daily, remember?
-      .col-md-3.col-xs-6
-        .panel.panel-default(style="min-height:150px;")
-          .panel-heading 
-            a(href="/admin/blog"): strong Edit Post
-          .panel-body
-            p Remember that mistake you made, you should really fix it here.
-      .col-md-6.col-xs-12
-        .panel.panel-primary(style="min-height:150px;")
-          .panel-heading
-            h3.panel-title #{globalVars.title} Stats
-          .panel-body
-            .row
-              .col-md-6
-                p.text-primary Total Posts #{blogCount}
-              .col-md-6
-                p.text-primary Total Users #{userCount}
-            .row
-              .col-md-6
-                p.text-primary Total Comments 0
-              .col-md-6
-                p.text-primary Total Views 0

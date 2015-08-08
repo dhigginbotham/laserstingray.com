@@ -1,0 +1,164 @@
+// Constants
+// 
+// Shared use variables, keep things tidy maybe extend off of this
+// file, or replace it outright when templating.
+// 
+// Styleguide 1.2.
+
+// CSS Prefix
+// 
+// I dont really want to do this, but I also dont want to make
+// any opionions that should really be enforced inside of a 
+// minimalist css framework. You may also be looking at this 
+// wondering where this value is being set now.. it's been
+// moved inside of our `./config.js` to keep this as dynamic as
+// possible.
+// 
+// `@css-prefix`
+//
+// Styleguide 1.2.1
+
+// @css-prefix:                                          bs-;
+
+// Color Constants
+// 
+// Default color constants for the styleguide
+// 
+// <div class="row kss-constants">
+//    <div class="col fourcol kss-constants__colors">
+//      <div class="pr bs-shape mini circle primary"></div>
+//      <div class="pl">
+//        <span class="kss-constants__color">`@color-primary`</span>
+//      </div>
+//      <div class="cf"></div>
+//      <hr/>
+//    </div>
+//    <div class="col fourcol kss-constants__colors">
+//      <div class="pr bs-shape mini circle success"></div>
+//      <div class="pl">
+//        <span class="kss-constants__color">`@color-success`</span>
+//      </div>
+//      <div class="cf"></div>
+//      <hr/>
+//    </div>
+//    <div class="col fourcol kss-constants__colors">
+//      <div class="pr bs-shape mini circle warning"></div>
+//      <div class="pl">
+//        <span class="kss-constants__color">`@color-warning`</span>
+//      </div>
+//      <div class="cf"></div>
+//      <hr/>
+//    </div>
+// </div>
+// <div class="row kss-constants">
+//    <div class="col fourcol kss-constants__colors">
+//      <div class="pr bs-shape mini circle notice"></div>
+//      <div class="pl">
+//        <span class="kss-constants__color">`@color-notice`</span>
+//      </div>
+//      <div class="cf"></div>
+//      <hr/>
+//    </div>
+//    <div class="col fourcol kss-constants__colors">
+//      <div class="pr bs-shape mini circle info"></div>
+//      <div class="pl">
+//        <span class="kss-constants__color">`@color-info`</span>
+//      </div>
+//      <div class="cf"></div>
+//      <hr/>
+//    </div>
+//    <div class="col fourcol kss-constants__colors">
+//      <div class="pr bs-shape mini circle inverted"></div>
+//      <div class="pl">
+//        <span class="kss-constants__color">`@color-inverted`</span>
+//      </div>
+//      <div class="cf"></div>
+//      <hr/>
+//    </div>
+// </div>
+// 
+// Styleguide 1.2.2
+
+@color-primary:                                       #2371B1; //#1693A7; //#428bca;
+@color-success:                                       #9EBF24; //#C8CF02; //#5cb85c;
+@color-warning:                                       #E6781E; //#f0ad4e;
+@color-notice:                                        #CC0C39; //#d9534f;
+@color-info:                                          #E3DFBA; //#FCF7D3; //#F8FCC1; //#5bc0de;
+@color-inverted:                                      #333;
+@color-light:                                         #FFF; //#F1F1F1;
+
+//
+// grey color constants
+// these really need tweaking still
+//
+
+@color-grey-darkest:                                  #333;
+@color-grey-dark:                                     lighten(@color-grey-darkest, 20%);  
+@color-grey-light:                                    lighten(@color-grey-darkest, 50%);  
+@color-grey-lightest:                                 lighten(@color-grey-darkest, 70%);
+
+@color-grey-default:                                  #eee;
+@color-grey-default-accent:                           #ccc;  
+
+//
+// link color constants
+//
+
+@color-link:                                          @color-primary;
+@color-link-visited:                                  @color-link;
+@color-link-hover:                                    @color-link;
+@color-link-active:                                   @color-link;
+
+//
+// blockquote color constants
+//
+
+@color-blockquote:                                    @color-inverted;
+
+//
+// hr color constants
+//
+
+@color-hr:                                        @color-light;
+
+//
+// breakpoint constants
+//
+
+@breakpoint-phone:                                    280px;
+@breakpoint-tablet:                                   480px;
+@breakpoint-tablet-ls:                                768px;
+@breakpoint-desktop:                                  960px;
+
+//
+// grid constants
+//
+
+@grid-columns:                                        12;
+@grid-column-padding:                                 10px;
+@grid-float-breakpoint:                               @breakpoint-tablet;
+
+//
+// typography constants
+//
+
+@typo-font-size-base:                                 14px;
+@typo-font-size-vertical-rhythm:                      @typo-font-size-base * 1.25;
+@typo-font-size-large:                                @typo-font-size-base * 1.25; // ~20px
+@typo-font-size-small:                                @typo-font-size-base * 0.85; // ~14px
+@typo-font-size-mini:                                 @typo-font-size-base * 0.75; // ~12px
+
+@typo-font-base:                                      "PT Sans", Helvetica, 'Helvetica Neue', Arial, sans-serif;
+@typo-font-code:                                      "PT Mono", Menlo, 'Ubuntu Mono', 'Lucida Console', 'Courier New', Courier, monospace;
+@typo-font-heading:                                   @typo-font-base;
+
+@typo-font-lineheight:                                @typo-font-size-vertical-rhythm;
+
+@typo-font-size:                                      @typo-font-size-base;
+@typo-font-color:                                     @color-inverted;
+
+//
+// box-sizing constants
+//
+
+@line-height-base:                                    @typo-font-size-vertical-rhythm;

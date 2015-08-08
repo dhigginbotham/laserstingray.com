@@ -1,0 +1,96 @@
+// Panels
+// 
+// BASELESS Panels components, use them as you would any panel.
+// 
+// Markup: docs/panels.hbs
+// 
+// .primary - primary panel color
+// .success - success panel color
+// .warning - warning panel color
+// .notice - notice panel color
+// .info - info panel color
+// .inverted - inverted panel color
+// .round - round panel
+// 
+// Styleguide 2.7.
+
+.panel-accent(@bg: @color-grey-default, @border: @color-grey-default-accent, @color: @color-inverted) {
+  border: 1px solid @border;
+  .panel-heading {
+    color: @color;
+    background: @bg;
+    border-bottom: 1px solid @border;
+    text-shadow: 1px 1px 0 darken(@bg, 10%);
+  }
+  .panel-list {
+    .panel-list-item {
+      border-top: 1px solid @border;
+    }
+  }
+}
+
+.@{css-prefix}panel {
+
+  .reset-spacing(0,0);
+  .clearfix();
+  margin-bottom: 10px;
+
+  .panel-heading,
+  .panel-body,
+  .panel-list-item,
+  .panel-notice {
+    .reset-spacing(0, 10px);
+  }
+
+  .panel-heading {
+    font-weight: bold;
+  }
+
+  .panel-foot {
+    .reset-spacing(0, 5px 10px);
+    font-size: 75%;
+  }
+
+  &.round {
+    .border-radius();
+  }
+  
+  .panel-list {
+    .panel-list-item {
+      &:first-child, &.first {
+        border-top: none;
+      }
+    }
+  }
+
+  .panel-accent();
+  
+  &.default {
+    .panel-accent();
+  }
+
+  &.primary {
+    .panel-accent(@color-primary, darken(@color-primary, 10%), @color-light);
+  }
+
+  &.success {
+    .panel-accent(@color-success, darken(@color-success, 10%), @color-light);
+  }
+
+  &.warning {
+    .panel-accent(@color-warning, darken(@color-warning, 10%), @color-light);
+  }
+
+  &.notice {
+    .panel-accent(@color-notice, darken(@color-notice, 10%), @color-light);
+  }
+
+  &.info {
+    .panel-accent(@color-info, darken(@color-info, 10%));
+  }
+
+  &.inverted {
+    .panel-accent(@color-inverted, darken(@color-inverted, 10%), @color-light);
+  }
+
+}
