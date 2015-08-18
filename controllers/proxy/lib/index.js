@@ -1,5 +1,5 @@
 var request = require('request'),
-    _ = require('lodash'),
+    lo = require('lodash'),
     bodyParser = require('body-parser');
 
 var Proxy = function(opts, app) {
@@ -11,14 +11,12 @@ var Proxy = function(opts, app) {
   this.host = null;
   this.preware = [];
   this.headers = {};
-  this.jsonTransport = true;
 
-  if (opts) _.extend(this, opts);
+  if (opts) lo.extend(this, opts);
 
   if (!this.preware instanceof Array) {
     this.preware = [this.preware];
   }
-
   var buildUri = function(url) {
     return (typeof url != 'undefined' && this.host
       ? this.host + url.replace(this.endpoint,'') 
@@ -26,28 +24,28 @@ var Proxy = function(opts, app) {
   }.bind(this);
 
   var setupProxyObject = function(req, res, next) {
-    req._proxyObject = _.omit(this,'preware');
+    req._proxyObject = lo.omit(this,'preware');
     return next();
   }.bind(this);
 
   var router = function(req, res) {
     var route = {};
     route.url = buildUri(req.url);
-    route.headers = _.extend({}, this.headers);
+    route.headers = this.headers;
     route.method = req.method;
-    route.json = this.jsonTransport;
+    route.json = true;
     // i guess the second you start being tricky
     // is the same second you want to start docs
     // we're going to inspect the method type, 
     // and then to be on the safe side we'll also
     // enforce your req.body has some stuff in it
-    if (route.method.toLowerCase() != 'get' && Object.keys(req.body).length) {
+    if (route.method.toLowerCase() != 'get' 
+      && Object.keys(req.body).length) {
       route.body = req.body;
     }
     if (route.url) {
       request(route, function(err, data) {
-        if (err) { 
-          console.log(err);
+        if (err) {
           return res.status(500).json({error: 'oh noes, we\'ve had a critical error .'});
         } else {
           return res.status(data.statusCode).send(data.body);
