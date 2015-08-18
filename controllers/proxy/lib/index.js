@@ -1,5 +1,5 @@
 var request = require('request'),
-    lo = require('lodash'),
+    _ = require('lodash'),
     bodyParser = require('body-parser');
 
 var Proxy = function(opts, app) {
@@ -12,19 +12,20 @@ var Proxy = function(opts, app) {
   this.preware = [];
   this.headers = {};
 
-  if (opts) lo.extend(this, opts);
+  if (opts) _.extend(this, opts);
 
   if (!this.preware instanceof Array) {
     this.preware = [this.preware];
   }
   var buildUri = function(url) {
-    return (typeof url != 'undefined' && this.host
+    var uri = (typeof url != 'undefined' && this.host
       ? this.host + url.replace(this.endpoint,'') 
       : null);
+    return (!uri || uri == '/' ? null : uri);
   }.bind(this);
 
   var setupProxyObject = function(req, res, next) {
-    req._proxyObject = lo.omit(this,'preware');
+    req._proxyObject = _.omit(this,'preware');
     return next();
   }.bind(this);
 
@@ -46,13 +47,13 @@ var Proxy = function(opts, app) {
     if (route.url) {
       request(route, function(err, data) {
         if (err) {
-          return res.status(500).json({error: 'oh noes, we\'ve had a critical error .'});
+          return res.status(500).json({message: 'oh noes, we\'ve had a critical error .'});
         } else {
           return res.status(data.statusCode).send(data.body);
         }
       });
     } else {
-      return res.status(400).json({error: 'You must provide a url to request'});
+      return res.status(500).json({message: 'You must provide a url to request'});
     }
   }.bind(this);
 
