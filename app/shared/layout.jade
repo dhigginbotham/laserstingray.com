@@ -13,11 +13,11 @@ html(lang="en")
       link(rel="stylesheet", type="text/css", href="/css/style.min.css")
       if (adminSection)
         link(rel="stylesheet", type="text/css", href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css")
-    
+
     title #{globalVars.title}
-          
+
   body
-    include navbar
+    //- include navbar
 
     if (flash)
       p #{flash}
@@ -27,7 +27,7 @@ html(lang="en")
     block footer
       footer.cf.container
         p.pr.text-primary Copyright #{globalVars.copyrightDate} #{globalVars.appName}
-    
+
     block footerScripts
       script(type="text/javascript", src="/js/client.min.js")
       if (adminSection)

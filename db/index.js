@@ -8,6 +8,6 @@ if (config.env == 'development') {
 var conn = config.db;
 var db = module.exports = mongoose.createConnection(conn);
 
-process.on('SIGINT', function() {
-  db.close();
-});
+// process.on('SIGINT', function() {
+//   db.close();
+// });

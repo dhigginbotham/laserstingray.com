@@ -16,7 +16,7 @@ var passport = require('passport');
 //app level middleware
 //
 
-var middleware = require('./controllers/middleware');
+var middleware = require('app/middleware');
 var templateVariables = middleware.templateVariables;
 var userVariables = middleware.userVariables;
 var canPlayRoleOf = middleware.canPlayRoleOf;
@@ -74,22 +74,22 @@ app.use(hasRoleOf);
 //sub applications
 //
 
-app.use(require('./controllers/home'));
-app.use(require('./controllers/auth'));
-app.use(require('./controllers/admin'));
-app.use(require('./controllers/blog'));
-app.use(require('./controllers/rest'));
-app.use(require('./controllers/users'));
+app.use(require('app/home'));
+app.use(require('app/auth'));
+app.use(require('app/admin'));
+app.use(require('app/blog'));
+app.use(require('app/rest'));
+app.use(require('app/users'));
 
 //
 //error pages, dont mount things after this
 //
 
-app.use(require('./controllers/errors'));
+app.use(require('app/errors'));
 
 app.listen(app.get('port'), function () {
-  console.log('%s is listening on port %d in %s mode', 
-              app.get('title'), 
+  console.log('%s is listening on port %d in %s mode',
+              app.get('title'),
               app.get('port'),
               app.get('env'));
 });

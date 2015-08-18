@@ -1,10 +1,12 @@
 {
   "name": "laserstingray.com",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "personal blog",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "symlink": "ln -s ./app ./node_modules/ 2>\/dev\/null; exit 0;",
+    "postinstall": "npm run symlink"
   },
   "author": "dhigginbotham",
   "license": "MIT",

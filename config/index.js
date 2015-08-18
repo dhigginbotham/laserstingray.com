@@ -9,7 +9,7 @@ var config = {
   appName: 'LaserStingray',
   port: 3000,
   sessionId: 'lsid',
-  views: path.join(__dirname, '..', 'views'),
+  views: path.join(__dirname, '..', 'app'),
   public: path.join(__dirname, '..', 'assets', 'build'),
   secret: 'do_not_use_in_production!!',
   db: 'mongodb://127.0.0.1:27017/laserStingray',
