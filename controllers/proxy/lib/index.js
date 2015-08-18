@@ -1,67 +1,67 @@
-/**
- * proxy controller for express, utilizes
- * mongodb cache things
- */
 var request = require('request'),
-    lo = require('lodash'),
+    _ = require('lodash'),
     bodyParser = require('body-parser');
 
-var napip = function(opts, done) {
+var Proxy = function(opts, app) {
 
-  // private operations fns, declared here
-  // to avoid any confusion as to their
-  // purposes
-  var xhr, 
-      transformer, 
-      router;
+  if (typeof opts == 'undefined') throw new Error('You must provide a reference to an `options` object');
+  if (typeof app == 'undefined') throw new Error('You must provide context to an express `app`');
+  
+  this.endpoint = '/proxy';
+  this.host = null;
+  this.preware = [];
+  this.headers = {};
+  this.jsonTransport = true;
 
-  this.prefix = '/proxy';
+  if (opts) _.extend(this, opts);
 
-  // base url for a proxy endpoint, be as complete
-  // or generic as you want, but remember -- this is
-  // a pretty powerful proxy layer without basic 
-  // security in place you can leave someone elses
-  // APIs wide open, or worse -- authenticated with
-  // your credentials.
-  this.proxyUrl = null;
-
-  // supports methods, sometimes(usually?) you'll
-  // want a bit extra control over a proxy layer
-  // as transparent as this.
-  this.supports = ['delete','get', 'post', 'put'];
-
-  // an important note would be that I (@dhigginbotham) want
-  // support for stale,expired data on a prefetch 
-  // and onstale strategy for my use cases so I'll 
-  // be writing this mostly supporting those strategies
-
-  // following express concept of middleware
-  // this will allow you to have control over
-  // before and after proxied request.
-  this.transformers = {
-    pre: [],
-    after: []
-  };
-
-  if (typeof opts != 'undefined') {
-    lo.extend(this, opts);
+  if (!this.preware instanceof Array) {
+    this.preware = [this.preware];
   }
 
-  var self = this;
+  var buildUri = function(url) {
+    return (typeof url != 'undefined' && this.host
+      ? this.host + url.replace(this.endpoint,'') 
+      : null);
+  }.bind(this);
 
-  /**
-   * internal request handler
-   * @param  {Object}   opts [description]
-   * @param  {Function} fn   [description]
-   */
-  xhr = function(opts, fn) {
+  var setupProxyObject = function(req, res, next) {
+    req._proxyObject = _.omit(this,'preware');
+    return next();
+  }.bind(this);
 
-  };
+  var router = function(req, res) {
+    var route = {};
+    route.url = buildUri(req.url);
+    route.headers = _.extend({}, this.headers);
+    route.method = req.method;
+    route.json = this.jsonTransport;
+    // i guess the second you start being tricky
+    // is the same second you want to start docs
+    // we're going to inspect the method type, 
+    // and then to be on the safe side we'll also
+    // enforce your req.body has some stuff in it
+    if (route.method.toLowerCase() != 'get' && Object.keys(req.body).length) {
+      route.body = req.body;
+    }
+    if (route.url) {
+      request(route, function(err, data) {
+        if (err) { 
+          console.log(err);
+          return res.status(500).json({error: 'oh noes, we\'ve had a critical error .'});
+        } else {
+          return res.status(data.statusCode).send(data.body);
+        }
+      });
+    } else {
+      return res.status(400).json({error: 'You must provide a url to request'});
+    }
+  }.bind(this);
 
-  router = function(req, res, next) {
-    var method = req.method.toLowerCase();
-  };
+  app.use(this.endpoint, bodyParser.json(), setupProxyObject, this.preware, router);
 
   return this;
 
 };
+
+module.exports = Proxy;
