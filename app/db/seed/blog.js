@@ -1,6 +1,6 @@
-var config = require('../../config');
-var Blog = require('../blog');
-var db = require('../');
+var config = require('app/config');
+var Blog   = require('app/blog/model');
+var db     = require('app/db');
 
 if (config.seed.blog) {
   db.once('open', function() {

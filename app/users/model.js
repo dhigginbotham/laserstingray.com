@@ -1,8 +1,8 @@
-var db = require('../');
+var db = require('app/db');
 var Schema = require('mongoose').Schema;
 var ObjectId = require('mongoose').ObjectId;
 
-var config = require('../../config');
+var config = require('app/config');
 
 var bcrypt = require('bcrypt');
 var SALT_WORK_FACTOR = 10;
@@ -43,10 +43,28 @@ UserSchema.methods.comparePassword = function(candidatePassword, cb) {
   });
 };
 
+function defCallback(res, next) {
+  return function(err, data) {
+    if (err) return next(err);
+    res.locals.collection = data;
+    return next();
+  };
+}
+
+
 var User = module.exports = db.model('User', UserSchema);
 
+UserSchema.statics.middleware = {
+  findAll: function findAll(req, res, next) {
+    User.find({}, null, {sort: {created_date: -1}}, defCallback(res, next));
+  },
+  find: function find(req, res, next) {
+    var query = (req.params.id ? {_id: req.params.id} : {});
+    User.findOne(query, null, {sort: {created_date: -1}}, defCallback(res, next));
+  }
+};
 //
 //db seed for user
 //
 
-var user = require('../seed/user');
+var user = require('app/db/seed/user');

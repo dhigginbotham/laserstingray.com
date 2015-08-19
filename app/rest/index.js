@@ -3,8 +3,8 @@ var app = module.exports = express();
 
 var Rest = require('./lib');
 var Validate = require('./lib/validate');
-var Blog = require('../../db/blog');
-var User = require('../../db/user');
+var Blog = require('app/blog/model');
+var User = require('app/users/model');
 
 //
 //generic rest handler for application paths (using here, because we're not going to need authkeys)
@@ -20,7 +20,7 @@ function stateAuthentication(req, res, next) {
 
 function validateBlogPosts(req, res, next) {
   var requiredKeys = [{
-    key: 'title', 
+    key: 'title',
     minlength: 3
   },{
     key: 'body',

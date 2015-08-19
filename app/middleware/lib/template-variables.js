@@ -5,7 +5,7 @@
 // like `title`, `app name`, etc
 //
 
-var config = require('../../../config');
+var config = require('app/config');
 
 function templateVariables(req, res, next) {
   res.locals.globalVars = config.templateVariables;

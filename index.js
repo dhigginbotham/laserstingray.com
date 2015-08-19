@@ -1,6 +1,13 @@
+var config;
+try {
+  config = require('app/config');
+} catch(err) {
+  console.error('!!!! ^^^^ IMPORTANT:\n Run this:\nnpm run symlink\n\n\nThat should fix it!\n\n\nError:', err);
+  process.exit(-99);
+}
+
 var express = require('express');
 var app = express();
-var config = require('./config');
 
 //
 //app dependencies

@@ -1,6 +1,6 @@
-var config = require('../../config');
-var User = require('../user');
-var db = require('../');
+var config = require('app/config');
+var User   = require('app/users/model');
+var db     = require('app/db');
 
 if (config.seed.admin) {
   db.once('open', function() {

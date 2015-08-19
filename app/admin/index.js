@@ -1,17 +1,17 @@
-var express = require('express');
-var app = module.exports = express();
-var config = require('../../config');
-var marked = require('marked');
-var moment = require('moment');
-
-var middle = require('./middle');
-var blogMiddleware = require('../../db/blog/middleware');
+var express         = require('express');
+var app             = module.exports = express();
+var config          = require('app/config');
+var marked          = require('marked');
+var moment          = require('moment');
+var _               = require('lodash');
+var middle          = require('./middle');
+var blogMiddleware  = require('app/blog/middle');
 
 app.set('views', config.views);
 app.set('view engine', 'jade');
 
-var prefix = '/admin';
-var id = '/:id?';
+var prefix  = '/admin';
+var id      = '/:id?';
 
 app.use(prefix, function(req, res, next) {
   if (req.canPlayRoleOf('admin')) {
