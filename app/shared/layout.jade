@@ -11,8 +11,6 @@ html(lang="en")
 
     block headerStyles
       link(rel="stylesheet", type="text/css", href="/css/style.min.css")
-      if (adminSection)
-        link(rel="stylesheet", type="text/css", href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css")
 
     title #{globalVars.title}
 
@@ -29,5 +27,3 @@ html(lang="en")
 
     block footerScripts
       script(type="text/javascript", src="/js/client.min.js")
-      if (adminSection)
-        script(type="text/javascript", src="/js/admin.min.js")
