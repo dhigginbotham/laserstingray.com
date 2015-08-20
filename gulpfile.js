@@ -4,15 +4,16 @@ var concat = require('gulp-concat');
 
 // path prefix
 var prefix = 'assets/';
+var vendorPrefix = prefix + 'src/vendor/';
 
 var paths = {
   vendor: [
-    prefix + 'src/vendor/modernizr/modernizr.js',
-    prefix + 'src/vendor/jquery/jquery.min.js'
+    vendorPrefix + 'modernizr/modernizr.js',
+    vendorPrefix + 'jquery/jquery.min.js'
   ],
   library: [
     prefix + 'src/js/utils/global.js',
-    prefix + 'src/vendor/murk/dist/murk.js'
+    vendorPrefix + 'murk/dist/murk.js'
   ],
   libraryAdmin: [
   ],
@@ -24,8 +25,8 @@ var paths = {
     prefix + 'build/js/vendor.min.js',
     prefix + 'build/js/library.min.js'
   ],
-  lessCore: [
-    prefix + 'src/less/**/_style.less'
+  css: [
+    vendorPrefix + 'baseless/dist/style.min.css'
   ]
 };
 
@@ -57,8 +58,8 @@ gulp.task('vendorAdmin', function() {
     .pipe(gulp.dest(prefix + 'build/js'));
 });
 
-gulp.task('lessCore', function () {
-  return gulp.src(paths.lessCore)
+gulp.task('css', function () {
+  return gulp.src(paths.css)
     .pipe(concat('style.min.css'))
     .pipe(gulp.dest(prefix + 'build/css'));
 });
@@ -88,7 +89,7 @@ gulp.task('watch', function() {
 var uberTasks = [];
 uberTasks.push('library');
 // uberTasks.push('libraryAdmin');
-uberTasks.push('less');
+uberTasks.push('css');
 uberTasks.push('vendor');
 // uberTasks.push('vendorAdmin');
 // uberTasks.push('productionClient');
