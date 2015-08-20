@@ -49,7 +49,7 @@ if(app.get('env') == 'production') {
     name: config.sessionId,
     secret: config.secret,
   }));
-  app.use(morgan());
+  app.use(morgan('tiny'));
 }
 
 //

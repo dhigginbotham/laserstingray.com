@@ -5,14 +5,14 @@ var path = require('path');
 //
 
 var config = {
-  title:     'LaserStingray',
-  appName:   'LaserStingray',
+  title:     'randomSiteIsRandom',
+  appName:   'randomSiteIsRandom',
   port:       3000,
-  sessionId: 'lsid',
+  sessionId: 'rsid',
   views:      path.join(__dirname, '..'),
   public:     path.join(__dirname, '../..', 'assets', 'build'),
   secret:     process.env.NODE_SECRET || 'do_not_use_in_production!!',
-  db:         process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/laserStingray',
+  db:         process.env.MONGO_URI || 'mongodb://172.17.42.1:27017/randomSiteIsRandom',
   env:        process.env.NODE_ENV || 'development'
 };
 
