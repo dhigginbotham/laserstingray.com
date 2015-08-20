@@ -7,8 +7,8 @@ var prefix = 'assets/';
 
 var paths = {
   vendor: [
-    prefix + 'src/js/vendor/modernizr.2.7.1.min.js',
-    prefix + 'src/js/vendor/jquery.1.11.1.min.js'
+    prefix + 'src/vendor/modernizr/modernizr.js',
+    prefix + 'src/vendor/jquery/jquery.min.js'
   ],
   library: [
     prefix + 'src/js/utils/global.js',
