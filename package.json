@@ -1,10 +1,11 @@
 {
   "name": "laserstingray.com",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "personal blog",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "symlink": "ln -s ./node_modules/app ./app/ 2>/dev/null; exit 0;"
   },
   "author": "dhigginbotham",
   "license": "MIT",
@@ -26,8 +27,8 @@
     "moment": "~2.9.0"
   },
   "devDependencies": {
+    "gulp": "^3.9.0",
     "gulp-concat": "~2.4.3",
-    "gulp-uglify": "~1.0.2",
-    "gulp": "~3.8.10"
+    "gulp-uglify": "~1.0.2"
   }
 }

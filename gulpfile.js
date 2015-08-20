@@ -1,30 +1,33 @@
 var gulp = require('gulp');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
+
 // path prefix
 var prefix = 'assets/';
+var vendorPrefix = prefix + 'src/vendor/';
+
 var paths = {
   vendor: [
-    prefix + 'src/js/vendor/modernizr.2.7.1.min.js',
-    prefix + 'src/js/vendor/jquery.1.11.1.min.js'
+    vendorPrefix + 'modernizr/modernizr.js',
+    vendorPrefix + 'jquery/jquery.min.js'
   ],
   library: [
-    prefix + 'src/js/utils/global.js'
+    prefix + 'src/js/utils/global.js',
+    vendorPrefix + 'murk/dist/murk.js'
   ],
   libraryAdmin: [
-    prefix + 'src/js/lib/adminController.js'
   ],
   vendorAdmin: [
   ],
   productionAdmin: [
-    prefix + 'build/js/vendor.admin.min.js',
-    prefix + 'build/js/library.admin.min.js'
   ],
   productionClient: [
     prefix + 'build/js/vendor.min.js',
     prefix + 'build/js/library.min.js'
   ],
-  css: [prefix + 'src/less/**/_style.less']
+  css: [
+    vendorPrefix + 'baseless/dist/style.min.css'
+  ]
 };
 
 gulp.task('library', function() {
@@ -75,12 +78,22 @@ gulp.task('productionAdmin', function() {
 
 gulp.task('watch', function() {
   gulp.watch(paths.library, ['library']);
-  gulp.watch(paths.libraryAdmin, ['libraryAdmin']);
+  // gulp.watch(paths.libraryAdmin, ['libraryAdmin']);
   gulp.watch(paths.css, ['css']);
   gulp.watch(paths.vendor, ['vendor']);
-  gulp.watch(paths.vendorAdmin, ['vendorAdmin']);
-  gulp.watch(paths.productionClient, ['productionClient']);
-  gulp.watch(paths.productionAdmin, ['productionAdmin']);
+  // gulp.watch(paths.vendorAdmin, ['vendorAdmin']);
+  // gulp.watch(paths.productionClient, ['productionClient']);
+  // gulp.watch(paths.productionAdmin, ['productionAdmin']);
 });
 
-gulp.task('uber', ['library', 'libraryAdmin', 'css', 'vendor', 'vendorAdmin', 'productionClient', 'productionAdmin', 'watch']);
+var uberTasks = [];
+uberTasks.push('library');
+// uberTasks.push('libraryAdmin');
+uberTasks.push('css');
+uberTasks.push('vendor');
+// uberTasks.push('vendorAdmin');
+// uberTasks.push('productionClient');
+// uberTasks.push('productionAdmin');
+uberTasks.push('watch');
+
+gulp.task('uber', uberTasks);

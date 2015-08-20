@@ -1,0 +1,15 @@
+extends ../shared/layout
+
+block content
+  .container
+    if (!user)
+      form(role="form", method="post", action="/auth")
+        .form-group
+          label(for="usernameField") Username
+          input.form-control(type="text", id="usernameField", name="username", placeholder="Username")
+        .form-group
+          label(for="passwordField") Password
+          input.form-control(type="password", id="passwordField", name="password", placeholder="Password")
+        button.btn.btn-default(type="submit") Login
+    else
+      h1 Welcome back #{user.username}

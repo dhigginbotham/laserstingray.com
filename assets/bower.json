@@ -1,0 +1,23 @@
+{
+  "name": "laserstingray",
+  "version": "0.0.0",
+  "homepage": "https://github.com/dhigginbotham/laserstingray.com",
+  "authors": [
+    "David Higginbotham <davehigginbotham@gmail.com>"
+  ],
+  "description": "bower deps",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./src/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "baseless": "*",
+    "murk": "*",
+    "jquery": "~1.8.3"
+  }
+}
