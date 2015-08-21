@@ -8,9 +8,9 @@ block content
       if (b.title && b.body)
         section.blog-container.clearfix(style="margin-bottom:30px;")
           if (b.title)
-            legend
-              p.pull-right.muted.small(style="font-size:65%;") #{moment(b.created_date).format('MMMM Do YYYY, h:mm:ss a')}
-              h3: a(href="/blog/#{b.id}") !{marked(b.title)}
+            h3
+              p.pr.muted.small(style="font-size:45%;") #{moment(b.created_date).format('MMMM Do YYYY, h:mm:ss a')}
+              a(href="/blog/#{b.id}") !{marked(b.title)}
           .clearfix
           if (b.body)
             P !{marked(b.body)}

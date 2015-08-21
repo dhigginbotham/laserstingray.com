@@ -16,8 +16,7 @@ html(lang="en")
   body
 
     if (flash)
-      .container
-        .bs-alert #{flash}
+      .container: .bs-alert: .alert-text #{flash}
 
     .container
       ul.bs-list.nav.flat.inline.pr
