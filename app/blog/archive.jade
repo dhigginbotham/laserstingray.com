@@ -2,13 +2,15 @@ extends ../shared/layout
 
 block content
   .container
+    h2 Blog
+    hr
     each b in blog
       if (b.title && b.body)
         section.blog-container.clearfix(style="margin-bottom:30px;")
           if (b.title)
             legend
               p.pull-right.muted.small(style="font-size:65%;") #{moment(b.created_date).format('MMMM Do YYYY, h:mm:ss a')}
-              p: a(href="/blog/#{b.id}") !{marked(b.title)}
+              h3: a(href="/blog/#{b.id}") !{marked(b.title)}
           .clearfix
           if (b.body)
             P !{marked(b.body)}

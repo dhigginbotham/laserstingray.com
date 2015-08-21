@@ -13,4 +13,3 @@ $.fn.serializeObject = function() {
   });
   return obj;
 };
-

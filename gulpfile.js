@@ -82,7 +82,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.css, ['css']);
   gulp.watch(paths.vendor, ['vendor']);
   // gulp.watch(paths.vendorAdmin, ['vendorAdmin']);
-  // gulp.watch(paths.productionClient, ['productionClient']);
+  gulp.watch(paths.productionClient, ['productionClient']);
   // gulp.watch(paths.productionAdmin, ['productionAdmin']);
 });
 
@@ -92,7 +92,7 @@ uberTasks.push('library');
 uberTasks.push('css');
 uberTasks.push('vendor');
 // uberTasks.push('vendorAdmin');
-// uberTasks.push('productionClient');
+uberTasks.push('productionClient');
 // uberTasks.push('productionAdmin');
 uberTasks.push('watch');
 
