@@ -2,11 +2,9 @@ extends ../shared/layout
 
 block content
   .container
-    h1
-      if (blog.created_date)
-        p.pull-right.small #{moment(blog.created_date).format('MMMM Do YYYY, h:mm:ss a')}
-      if (blog.title)
-        a(href="#") !{marked(blog.title)}
+    h2
+      p.pr.muted.small(style="font-size:45%;") #{moment(blog.created_date).format('MMMM Do YYYY, h:mm:ss a')}
+      a(href="/blog/#{blog.id}") !{marked(blog.title)}
     hr
     if (blog.body)
       P !{marked(blog.body)}

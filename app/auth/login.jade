@@ -13,4 +13,6 @@ block content
         .bs-form-control
           button.bs-btn.primary.large(type="submit") Login
     else
-      h1 Welcome back #{user.username}
+      h2 Welcome back #{user.username}
+      hr
+      a(href="/auth/logout") Would you like to logout?
