@@ -3,13 +3,14 @@ extends ../shared/layout
 block content
   .container
     if (!user)
-      form(role="form", method="post", action="/auth")
-        .form-group
+      form.bs-form(role="form", method="post", action="/auth")
+        .bs-form-group
           label(for="usernameField") Username
-          input.form-control(type="text", id="usernameField", name="username", placeholder="Username")
-        .form-group
+          input.bs-form-elem.full-width(type="text", id="usernameField", name="username", placeholder="Username")
+        .bs-form-group
           label(for="passwordField") Password
-          input.form-control(type="password", id="passwordField", name="password", placeholder="Password")
-        button.btn.btn-default(type="submit") Login
+          input.bs-form-elem.full-width(type="password", id="passwordField", name="password", placeholder="Password")
+        .bs-form-control
+          button.bs-btn.primary.large(type="submit") Login
     else
       h1 Welcome back #{user.username}

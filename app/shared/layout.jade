@@ -16,10 +16,21 @@ html(lang="en")
   body
 
     if (flash)
-      p #{flash}
+      .container: .bs-alert: .alert-text #{flash}
 
-    div.content-frame(style="width:1000px; margin:0 auto;")
-      block content
+    .container
+      ul.bs-list.nav.flat.inline.pr
+        li: a(href="/") Home
+        li: a(href="/blog") Blog
+        if (canPlayRoleOf('admin'))
+          li: a(href="/admin") Dashboard
+        if (user)
+          li: a(href="/users") Users
+          li: a(href="/auth/logout") Logout
+        else
+          li: a(href="/auth") Login
+
+    block content
 
     block footer
       footer.cf.container

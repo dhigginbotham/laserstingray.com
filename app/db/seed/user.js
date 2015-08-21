@@ -11,9 +11,8 @@ if (config.seed.admin) {
           username: 'admin',
           password: process.env.NODE_PASS || 'if_you_need_to_use_this_in_prod_set_env_var',
           email: 'admin@localhost.it',
-          role: 10
+          role: 64
         });
-
         admin.save(function(err) {
           if (err) throw new Error(err);
         });
