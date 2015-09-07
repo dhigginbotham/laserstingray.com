@@ -7,5 +7,5 @@ app.set('view engine', 'jade');
 
 app.route('/')
   .get(function(req, res) {
-    res.render('home/index')
+    res.render('home/index');
   });

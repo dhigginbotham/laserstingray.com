@@ -12,7 +12,6 @@ RUN mkdir -p /apps
 # Define working directory
 COPY . /apps/
 WORKDIR /apps
-RUN ["npm", "run", "symlink"]
 RUN ["npm", "install"]
 # RUN apt-get update \
   # && apt-get dist-upgrade -y
