@@ -7,8 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "symlink": "ln -s ./node_modules/app ./app/ 2>/dev/null; exit 0;"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.org/dhigginbotham/laserstingray.com.git"
+  },
   "author": "dhigginbotham",
   "license": "MIT",
+  "homepage": "https://github.org/dhigginbotham/laserstingray.com#readme",
   "dependencies": {
     "hashids": "~1.0.1",
     "passport-local": "~1.0.0",
