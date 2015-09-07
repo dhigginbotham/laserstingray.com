@@ -15,8 +15,8 @@ This is my personal blog, there's probably not much to do with it -- however it'
 ### Dev mode
 ```sh
 
-$ docker build -t lsrting-dev .
+$ npm run docker-build
 
-$ docker run -p '3000:3000' -v /apps/node/laserstingray.com/app:/apps/node_modules/app  -it --rm --name lsrs lsrting-dev
+$ npm run docker-dev
 
 ```

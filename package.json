@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "symlink": "ln -s $PWD/app/ $PWD/node_modules/ 2>/dev/null; exit 0;"
+    "symlink": "ln -s $PWD/app/ $PWD/node_modules/ 2>/dev/null; exit 0;",
+    "docker-build": "docker build -t lsrting-dev .",
+    "docker-dev": "docker run -p '3000:3000' -v /apps/node/laserstingray.com/app:/apps/node_modules/app  -it --rm --name lsrs lsrting-dev"
   },
   "repository": {
     "type": "git",
