@@ -1,6 +1,6 @@
 var express = require('express');
 var app = module.exports = express();
-var config = require('app/config');
+var config = require('../config');
 var marked = require('marked');
 var moment = require('moment');
 

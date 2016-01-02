@@ -1,4 +1,4 @@
-var roles = require('app/config').applicationRoles;
+var roles = require('../../config').applicationRoles;
 
 function canPlayRoleOf(user) {
   return function(role) {

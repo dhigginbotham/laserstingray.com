@@ -1,4 +1,4 @@
-var Blog = require('app/blog/model');
+var Blog = require('./model');
 
 function findAll(req, res, next) {
   Blog.find({}, null, {sort: {created_date: -1}}, function(err, data) {

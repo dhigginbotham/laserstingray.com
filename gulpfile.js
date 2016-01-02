@@ -97,3 +97,4 @@ uberTasks.push('productionClient');
 uberTasks.push('watch');
 
 gulp.task('uber', uberTasks);
+gulp.task('default', uberTasks);

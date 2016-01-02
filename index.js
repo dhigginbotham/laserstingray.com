@@ -1,11 +1,4 @@
-var config;
-try {
-  config = require('app/config');
-} catch(err) {
-  console.error('!!!! ^^^^ IMPORTANT:\n Run this:\nnpm run symlink\n\n\nThat should fix it!\n\n\nError:', err);
-  process.exit(-99);
-}
-
+var config = require('./app/config');
 var express = require('express');
 var app = express();
 
@@ -23,7 +16,7 @@ var passport = require('passport');
 //app level middleware
 //
 
-var middleware = require('app/middleware');
+var middleware = require('./app/middleware');
 var templateVariables = middleware.templateVariables;
 var userVariables = middleware.userVariables;
 var canPlayRoleOf = middleware.canPlayRoleOf;
@@ -81,18 +74,18 @@ app.use(hasRoleOf);
 //sub applications
 //
 
-app.use(require('app/home'));
-app.use(require('app/auth'));
-app.use(require('app/admin'));
-app.use(require('app/blog'));
-app.use(require('app/rest'));
-app.use(require('app/users'));
+app.use(require('./app/home'));
+app.use(require('./app/auth'));
+app.use(require('./app/admin'));
+app.use(require('./app/blog'));
+app.use(require('./app/rest'));
+app.use(require('./app/users'));
 
 //
 //error pages, dont mount things after this
 //
 
-app.use(require('app/errors'));
+app.use(require('./app/errors'));
 
 app.listen(app.get('port'), function () {
   console.log('%s is listening on port %d in %s mode',

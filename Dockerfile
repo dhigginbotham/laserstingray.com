@@ -1,4 +1,4 @@
-FROM  node:0.12
+FROM  node:5
 
 # Install nodemon
 RUN npm install -g nodemon grunt-cli

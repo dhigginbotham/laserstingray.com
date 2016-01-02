@@ -1,8 +1,8 @@
-var db = require('app/db');
+var db = require('../db');
 var Schema = require('mongoose').Schema;
 var ObjectId = require('mongoose').ObjectId;
 
-var config = require('app/config');
+var config = require('../config');
 
 var BlogSchema = new Schema({
   author: String,
@@ -48,4 +48,4 @@ BlogSchema.statics.middleware = {
 //db seed for user
 //
 
-var blog = require('app/db/seed/blog');
+var blog = require('../db/seed/blog');

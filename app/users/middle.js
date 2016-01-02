@@ -1,4 +1,4 @@
-var User = require('app/users/model');
+var User = require('./model');
 
 function findAll(req, res, next) {
   User.find({}, null, {sort: {created_date: -1}}, function(err, data) {

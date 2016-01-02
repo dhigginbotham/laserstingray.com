@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var config   = require('app/config');
+var config   = require('../config');
 
 if (config.env == 'development') {
   mongoose.set('debug', true);

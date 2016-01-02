@@ -3,8 +3,8 @@ var app = module.exports = express();
 
 var Rest = require('./lib');
 var Validate = require('./lib/validate');
-var Blog = require('app/blog/model');
-var User = require('app/users/model');
+var Blog = require('../blog/model');
+var User = require('../users/model');
 
 //
 //generic rest handler for application paths (using here, because we're not going to need authkeys)

@@ -1,6 +1,6 @@
 var express = require('express');
 var app = module.exports = express();
-var config = require('app/config');
+var config = require('../config');
 
 app.set('views', config.views);
 app.set('view engine', 'jade');
@@ -8,7 +8,7 @@ app.set('view engine', 'jade');
 var prefix = '/users';
 var id = '/:id?';
 
-var middleware = require('app/users/middle');
+var middleware = require('./middle');
 
 function authMiddleware(req, res, next) {
   if (req.canPlayRoleOf('user')) {

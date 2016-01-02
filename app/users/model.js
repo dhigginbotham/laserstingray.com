@@ -1,8 +1,8 @@
-var db = require('app/db');
+var db = require('../db');
 var Schema = require('mongoose').Schema;
 var ObjectId = require('mongoose').ObjectId;
 
-var config = require('app/config');
+var config = require('../config');
 
 var bcrypt = require('bcrypt');
 var SALT_WORK_FACTOR = 10;
@@ -67,4 +67,4 @@ UserSchema.statics.middleware = {
 //db seed for user
 //
 
-var user = require('app/db/seed/user');
+var user = require('../db/seed/user');

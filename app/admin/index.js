@@ -1,11 +1,11 @@
 var express         = require('express');
 var app             = module.exports = express();
-var config          = require('app/config');
+var config          = require('../config');
 var marked          = require('marked');
 var moment          = require('moment');
 var _               = require('lodash');
 var middle          = require('./middle');
-var blogMiddleware  = require('app/blog/middle');
+var blogMiddleware  = require('../blog/middle');
 
 app.set('views', config.views);
 app.set('view engine', 'jade');

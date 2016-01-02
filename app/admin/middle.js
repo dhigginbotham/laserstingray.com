@@ -1,5 +1,5 @@
-var Blog = require('app/blog/model');
-var User = require('app/users/model');
+var Blog = require('../blog/model');
+var User = require('../users/model');
 var middle = {};
 
 middle.getBlogCount = function(req, res, next) {

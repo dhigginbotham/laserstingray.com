@@ -14,7 +14,7 @@ var Proxy = function(opts, app) {
 
   if (opts) _.extend(this, opts);
 
-  if (!this.preware instanceof Array) {
+  if (!(this.preware instanceof Array)) {
     this.preware = [this.preware];
   }
   var buildUri = function(url) {

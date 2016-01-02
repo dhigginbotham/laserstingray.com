@@ -4,10 +4,8 @@
   "description": "personal blog",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "symlink": "ln -s $PWD/app/ $PWD/node_modules/ 2>/dev/null; exit 0;",
     "docker-build": "docker build -t lsrting-dev .",
-    "docker-dev": "docker run -p '3000:3000' -v /apps/node/laserstingray.com/app:/apps/node_modules/app  -it --rm --name lsrs lsrting-dev"
+    "docker-dev": "docker run -p '3000:3000' -it --rm --name lsrs lsrting-dev"
   },
   "repository": {
     "type": "git",
@@ -17,25 +15,25 @@
   "license": "MIT",
   "homepage": "https://github.org/dhigginbotham/laserstingray.com#readme",
   "dependencies": {
-    "hashids": "~1.0.1",
-    "passport-local": "~1.0.0",
-    "passport": "~0.2.1",
-    "lodash": "~2.4.1",
-    "cookie-session": "~1.1.0",
-    "morgan": "~1.5.1",
-    "express-session": "~1.10.0",
-    "express": "~4.10.7",
-    "body-parser": "~1.10.1",
-    "jade": "~1.8.2",
     "bcrypt": "~0.8.0",
-    "mongoose": "~3.8.21",
-    "cookie-parser": "~1.3.3",
+    "body-parser": "~1.14.2",
+    "cookie-parser": "~1.4.0",
+    "cookie-session": "~2.0.0-alpha.1",
+    "express": "~4.13.3",
+    "express-session": "~1.12.1",
+    "hashids": "~1.0.1",
+    "jade": "~1.11.0",
+    "lodash": "~3.10.1",
     "marked": "~0.3.2",
-    "moment": "~2.9.0"
+    "moment": "~2.10.6",
+    "mongoose": "^4.3.4",
+    "morgan": "~1.6.1",
+    "passport": "~0.3.2",
+    "passport-local": "~1.0.0"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
-    "gulp-concat": "~2.4.3",
-    "gulp-uglify": "~1.0.2"
+    "gulp-concat": "~2.6.0",
+    "gulp-uglify": "~1.5.1"
   }
 }
