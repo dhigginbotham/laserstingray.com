@@ -1,4 +1,5 @@
-var path = require('path');
+var path = require('path'),
+    util = require('util');
 
 //
 // App shared configs
@@ -12,7 +13,7 @@ var config = {
   views:      path.join(__dirname, '..'),
   public:     path.join(__dirname, '../..', 'assets', 'build'),
   secret:     process.env.NODE_SECRET || 'do_not_use_in_production!!',
-  db:         process.env.MONGO_URI || 'mongodb://172.17.0.2:27017/laserstingray',
+  db:         (process.env.MONGO_PORT_27017_TCP_ADDR ? util.format('mongodb://%s:27017/laserstingray', process.env.MONGO_PORT_27017_TCP_ADDR) : 'mongodb://172.17.0.1:27017/laserstingray'),
   env:        process.env.NODE_ENV || 'development'
 };
 

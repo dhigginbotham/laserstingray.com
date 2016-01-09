@@ -80,6 +80,7 @@ app.use(require('./app/admin'));
 app.use(require('./app/blog'));
 app.use(require('./app/rest'));
 app.use(require('./app/users'));
+app.use(require('./app/tviewer'));
 
 //
 //error pages, dont mount things after this

@@ -17,4 +17,5 @@ RUN ["npm", "install"]
   # && apt-get dist-upgrade -y
 
 # Overridable Command
+ENV DEBUG=lsrs*
 ENTRYPOINT ["nodemon", "index"]
